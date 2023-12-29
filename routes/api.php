@@ -21,15 +21,4 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//IndexUserController
-//UpdateUserController
-//ShowUserController
-
-Route::prefix('users')->middleware(['auth:sanctum'])->group(function () {
-    Route::get('/', IndexUserController::class );
-    Route::put('/{user}', UpdateUserController::class );
-    Route::get('/{user}', ShowUserController::class );
-});
-
-
 require __DIR__.'/auth.php';

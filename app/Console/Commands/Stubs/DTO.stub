@@ -1,0 +1,12 @@
+<?php
+
+namespace App\DTO;
+
+class hello
+{
+    public function __construct(public readonly array $data)
+    {
+
+    }
+}
+

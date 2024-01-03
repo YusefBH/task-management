@@ -11,6 +11,11 @@ class ProjectUser extends Model
 {
     use HasFactory;
 
+    const RULE_OWNER = 'owner';
+    const RULE_MEMBER = 'member';
+    const RULE_Viewer = 'viewer';
+    const RULE = [self::RULE_OWNER , self::RULE_MEMBER , self::RULE_Viewer];
+
     protected $fillable = [
         'rule',
     ];

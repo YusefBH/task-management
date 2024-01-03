@@ -55,5 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(ProjectUser::class);
     }
 
-
+    public function getProjectsByRole($rule): HasMany
+    {
+        return $this->user_projects()->where('rule', $rule);
+    }
 }

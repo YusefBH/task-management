@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\User\IndexUserController;
-use App\Http\Controllers\User\ShowUserController;
-use App\Http\Controllers\User\UpdateUserController;
+use App\Http\Controllers\Project\CreateProjectController;
+use App\Http\Controllers\Project\DeleteProjectController;
+use App\Http\Controllers\Project\IndexProjectController;
+use App\Http\Controllers\Project\ShowProjectController;
+use App\Http\Controllers\Project\UpdateProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('projects')->middleware(['auth:sanctum' /*, 'verified'*/])->group(function () {//todo : verify check
+    Route::get('/', IndexProjectController::class);
+/*    Route::post('/', CreateProjectController::class);
+    Route::post('/{project}',  ShowProjectController::class);
+    Route::put('/{project}',  UpdateProjectController::class);
+    Route::delete('/{project}',  DeleteProjectController::class);*/
 });
 
 require __DIR__.'/auth.php';

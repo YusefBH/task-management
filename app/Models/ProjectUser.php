@@ -18,6 +18,8 @@ class ProjectUser extends Model
 
     protected $fillable = [
         'rule',
+        'user_id',
+        'project_id',
     ];
 
     public function user(): BelongsTo

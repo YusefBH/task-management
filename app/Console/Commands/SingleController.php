@@ -44,8 +44,11 @@ class SingleController extends Command
         Artisan::call("make:service Delete ".$name." Delete$name"."Service");
         Artisan::call("make:service-interface Delete ".$name." Delete$name"."ServiceInterface");
         Artisan::call("make:resource $name"."/".$name."Resource");
+        Artisan::call("make:request $name"."/Index".$name."Request");
+        Artisan::call("make:request $name"."/Show".$name."Request");
         Artisan::call("make:request $name"."/Create".$name."Request");
         Artisan::call("make:request $name"."/Update".$name."Request");
+        Artisan::call("make:request $name"."/Delete".$name."Request");
         Artisan::call("make:dto ".$name."DTO");
     }
 }

@@ -36,4 +36,9 @@ class Project extends Model
         return $this->morphMany(File::class , 'foreign');
     }
 
+    public function owner()
+    {
+        return $this->project_users()->where('rule' , '=' , 'owner')->first();
+    }
+
 }

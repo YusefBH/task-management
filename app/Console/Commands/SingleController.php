@@ -28,7 +28,7 @@ class SingleController extends Command
     public function handle()
     {
         $name = $this->argument('name');
-        Artisan::call("make:controller $name"."/Index$name"."Controller");
+/*        Artisan::call("make:controller $name"."/Index$name"."Controller");
         Artisan::call("make:controller $name"."/Create$name"."Controller");
         Artisan::call("make:controller $name"."/Show$name"."Controller");
         Artisan::call("make:controller $name"."/Update$name"."Controller");
@@ -48,7 +48,16 @@ class SingleController extends Command
         Artisan::call("make:request $name"."/Show".$name."Request");
         Artisan::call("make:request $name"."/Create".$name."Request");
         Artisan::call("make:request $name"."/Update".$name."Request");
-        Artisan::call("make:request $name"."/Delete".$name."Request");
-        Artisan::call("make:dto ".$name."DTO");
+        Artisan::call("make:request $name"."/Delete".$name."Request");*/
+        Artisan::call("make:dto RequestIndex".$name."DTO");
+        Artisan::call("make:dto RequestCreate".$name."DTO");
+        Artisan::call("make:dto RequestShow".$name."DTO");
+        Artisan::call("make:dto RequestUpdate".$name."DTO");
+        Artisan::call("make:dto RequestDelete".$name."DTO");
+        Artisan::call("make:dto ResponseIndex".$name."DTO");
+        Artisan::call("make:dto ResponseCreate".$name."DTO");
+        Artisan::call("make:dto ResponseShow".$name."DTO");
+        Artisan::call("make:dto ResponseUpdate".$name."DTO");
+        Artisan::call("make:dto ResponseDelete".$name."DTO");
     }
 }

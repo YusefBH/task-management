@@ -2,7 +2,7 @@
 
 namespace App\Services\Project\CreateProject;
 
-use App\Http\Requests\Project\CreateProjectRequest;
+use App\DTO\Project\Request\RequestCreateProjectDTO;
 use App\Http\Resources\Project\ProjectUsersResource;
 use App\Models\Project;
 use App\Models\ProjectUser;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class CreateProjectService implements CreateProjectServiceInterface
 {
-    public function create(CreateProjectRequest $request): JsonResponse
+    public function create(RequestCreateProjectDTO $projectDTO): JsonResponse
     {
         /** @var User $user */
         $user = Auth::user();
@@ -23,8 +23,8 @@ class CreateProjectService implements CreateProjectServiceInterface
         DB::beginTransaction();
         try {
             $project = Project::create([
-                'name' => $request->name,
-                'description' => $request->description,
+                'name' => $projectDTO->name,
+                'description' => $projectDTO->description,
             ]);
             $project_user = ProjectUser::create([
                 'rule' => 'owner',

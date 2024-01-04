@@ -2,9 +2,9 @@
 
 namespace App\Services\Project\CreateProject;
 
-use App\Http\Requests\Project\CreateProjectRequest;
+use App\DTO\Project\Request\RequestCreateProjectDTO;
 
 interface CreateProjectServiceInterface
 {
-    public function create(CreateProjectRequest $request);
+    public function create(RequestCreateProjectDTO $request);
 }

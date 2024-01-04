@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Project;
 
+use App\DTO\Project\Request\RequestCreateProjectDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\CreateProjectRequest;
 use App\Services\Project\CreateProject\CreateProjectServiceInterface;
@@ -11,6 +12,10 @@ class CreateProjectController extends Controller
 {
     public function __invoke(CreateProjectRequest $request , CreateProjectServiceInterface $projectService)
     {
-        return $projectService->create($request);
+        $data = RequestCreateProjectDTO::fromRequest(
+            $request->name,
+            $request->description
+        );
+        return $projectService->create($data);
     }
 }

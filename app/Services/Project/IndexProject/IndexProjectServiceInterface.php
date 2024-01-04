@@ -2,12 +2,9 @@
 
 namespace App\Services\Project\IndexProject;
 
-
-
-use App\Http\Requests\Project\IndexProjectRequest;
-use Illuminate\Http\Request;
+use App\DTO\Project\Request\RequestIndexProjectDTO;
 
 interface IndexProjectServiceInterface
 {
-    public function index(IndexProjectRequest $request);
+    public function index(RequestIndexProjectDTO $request);
 }

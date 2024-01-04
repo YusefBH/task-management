@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Project;
 
-use App\DTO\RequestProjectDTO;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\Project;

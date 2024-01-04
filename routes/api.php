@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Project\CreateProjectController;
+use App\Http\Controllers\Project\DeleteProjectController;
 use App\Http\Controllers\Project\IndexProjectController;
 use App\Http\Controllers\Project\ShowProjectController;
 use App\Http\Controllers\Project\UpdateProjectController;
@@ -27,7 +28,7 @@ Route::prefix('projects')->middleware(['auth:sanctum' /*, 'verified'*/])->group(
     Route::post('/', CreateProjectController::class);
     Route::get('/{project}',  ShowProjectController::class);
     Route::put('/{project}',  UpdateProjectController::class);
-/*    Route::delete('/{project}',  DeleteProjectController::class);*/
+    Route::delete('/{project}',  DeleteProjectController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Project\CreateProjectController;
 use App\Http\Controllers\Project\IndexProjectController;
 use App\Http\Controllers\Project\ShowProjectController;
+use App\Http\Controllers\Project\UpdateProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +26,8 @@ Route::prefix('projects')->middleware(['auth:sanctum' /*, 'verified'*/])->group(
     Route::get('/', IndexProjectController::class);
     Route::post('/', CreateProjectController::class);
     Route::get('/{project}',  ShowProjectController::class);
-/*    Route::put('/{project}',  UpdateProjectController::class);
-    Route::delete('/{project}',  DeleteProjectController::class);*/
+    Route::put('/{project}',  UpdateProjectController::class);
+/*    Route::delete('/{project}',  DeleteProjectController::class);*/
 });
 
 require __DIR__.'/auth.php';

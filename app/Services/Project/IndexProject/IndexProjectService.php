@@ -1,26 +1,29 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Services\Project\IndexProject;
 
+use App\DTO\Pagination\Pagination;
 use App\DTO\Project\Request\RequestIndexProjectDTO;
-use App\Http\Requests\Project\IndexProjectRequest;
-use App\Http\Resources\Project\ProjectUsersResource;
+use App\DTO\Project\ResponseProjectDTO;
+use App\Models\ProjectUser;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class IndexProjectService implements IndexProjectServiceInterface
 {
 
-    public function index(RequestIndexProjectDTO $dto): JsonResponse
+    public function index(RequestIndexProjectDTO $requestDTO): Pagination
     {
         /** @var User $user */
         $user = Auth::user();
-        $projects = $dto->rule
-            ? $user->getProjectsByRole($dto->rule)->paginate(5)
-            : $user->user_projects()->paginate(5);
-        $response = ProjectUsersResource::collection($projects);
+        $pagination = $requestDTO->rule
+            ? $user->getProjectsByRole($requestDTO->rule)->with('project')->paginate(5)
+            :$user->user_projects()->with('project')->paginate(5);
+        $projects =$pagination
+            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser , project: $projectuser->project));
 
-        return $response->response()->setStatusCode(200);
+        return Pagination::fromModelPaginatorAndData(
+            paginator: $pagination, data: $projects->toArray()
+        );
     }
 }

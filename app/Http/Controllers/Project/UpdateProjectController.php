@@ -9,6 +9,7 @@ use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Models\Project;
 use App\Services\Project\UpdateProject\UpdateProjectServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UpdateProjectController extends Controller
 {
@@ -17,6 +18,8 @@ class UpdateProjectController extends Controller
         $data = RequestUpdateProjectDTO::fromRequest(
             project: $project , name: $request->name , description: $request->description
         );
-        return $updateProjectService->update($data);
+        $responseData =  $updateProjectService->update($data);
+
+        return Response::success($responseData);
     }
 }

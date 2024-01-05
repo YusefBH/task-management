@@ -177,6 +177,7 @@ return [
          * My Service Providers
          */
         App\Providers\ServicesServiceProvider::class,
+        App\Providers\ResponseServiceProvider::class,
     ])->toArray(),
 
     /*

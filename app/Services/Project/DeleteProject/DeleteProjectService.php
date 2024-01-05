@@ -2,6 +2,7 @@
 
 namespace App\Services\Project\DeleteProject;
 
+use App\DTO\Project\ProjectDTO;
 use App\DTO\Project\Request\RequestDeleteProjectDTO;
 use App\Http\Requests\Project\DeleteProjectRequest;
 use App\Models\Project;
@@ -9,12 +10,11 @@ use Illuminate\Http\JsonResponse;
 
 class DeleteProjectService implements DeleteProjectServiceInterface
 {
-    public function delete(RequestDeleteProjectDTO $projectDTO): JsonResponse
+    public function delete(RequestDeleteProjectDTO $projectDTO): ProjectDTO
     {
-        $projectDTO->project->delete();
+        $project = $projectDTO->project;
+        $project->delete();
 
-        return response()->json([
-            'massage' => 'project deleted',
-        ]);
+        return ProjectDTO::fromModel($project);
     }
 }

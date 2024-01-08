@@ -28,7 +28,7 @@ class Task extends Model
         return $this->hasMany(Subtask::class);
     }
 
-    public function lable(): MorphOne
+    public function lable(): MorphOne // todo: avoid misspelling
     {
         return $this->morphOne(Lable::class , 'foreign');
     }

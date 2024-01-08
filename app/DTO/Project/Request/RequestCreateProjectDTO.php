@@ -2,7 +2,7 @@
 
 namespace App\DTO\Project\Request;
 
-class RequestCreateProjectDTO
+class RequestCreateProjectDTO // todo: ctrl+alt+l
 {
     public function __construct(
         public readonly string $name,

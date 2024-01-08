@@ -19,7 +19,7 @@ class ServicesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(
+        $this->app->bind( // todo: do not address services manually use CreateProjectServiceInterface::class instead
             'App\Services\Project\CreateProject\CreateProjectServiceInterface',
             'App\Services\Project\CreateProject\CreateProjectService'
         );

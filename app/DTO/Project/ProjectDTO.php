@@ -7,7 +7,7 @@ use RuntimeException;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class ProjectDTO
-{
+{ // todo: ctrl+alt+l
     public function __construct(
         public string $id,
         public string $name,
@@ -17,7 +17,7 @@ class ProjectDTO
     public static function fromModel(Project $project): ProjectDTO
     {
         try {
-            return new self(
+            return new self( // todo : add @property
                 id: $project->id,
                 name: $project->name,
                 description: $project->description

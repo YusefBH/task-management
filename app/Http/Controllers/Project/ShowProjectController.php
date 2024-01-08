@@ -11,11 +11,12 @@ use Illuminate\Http\Response;
 
 class ShowProjectController extends Controller
 {
+    // todo: delete unused element | specify the return type
     public function __invoke(ShowProjectRequest $request , Project $project , ShowProjectServiceInterface $showProjectService)
     {
         $data = RequestShowProjectDTO::fromRequest($project);
-        $rasponse_data =  $showProjectService->show($data);
+        $rasponse_data =  $showProjectService->show($data); // todo: avoid misspelling
 
-        return Response::success($rasponse_data);
+        return Response::success($rasponse_data); // todo: add @property
     }
 }

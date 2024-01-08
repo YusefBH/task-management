@@ -11,6 +11,7 @@ class ProjectUser extends Model
 {
     use HasFactory;
 
+    // todo: use enums
     const RULE_OWNER = 'owner';
     const RULE_MEMBER = 'member';
     const RULE_Viewer = 'viewer';

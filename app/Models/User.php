@@ -55,6 +55,7 @@ class User extends Authenticatable
         return $this->hasMany(ProjectUser::class);
     }
 
+    // todo: use query scopes instead => https://laravel.com/docs/10.x/eloquent#query-scopes:~:text=%2D%3Eget()%3B-,Local%20Scopes,-Local%20scopes%20allow
     public function getProjectsByRole($rule): HasMany
     {
         return $this->user_projects()->where('rule', $rule);

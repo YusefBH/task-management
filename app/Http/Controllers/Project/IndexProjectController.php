@@ -12,11 +12,12 @@ use Illuminate\Http\Response;
 
 class IndexProjectController extends Controller
 {
+    // todo: use auto reformat (ctrl+alt+l) to make your code cleaner
     public function __invoke(IndexProjectRequest $request, IndexProjectServiceInterface $projectService) :JsonResponse
     {
         if ($request->has('rule')) {
             $data = RequestIndexProjectDTO::fromRequest(
-                $request->rule
+                $request->rule // todo: add @property
             );
         } else {
             $data = RequestIndexProjectDTO::fromRequest(
@@ -26,6 +27,6 @@ class IndexProjectController extends Controller
 
         $responseData = $projectService->index($data);
 
-        return Response::success($responseData);
+        return Response::success($responseData); // todo: add @property
     }
 }

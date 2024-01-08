@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\ProjectUser;
+use App\Models\ProjectUser; // todo: remove unused imports
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,12 +31,12 @@ class Project extends Model
         return $this->hasMany(Task::class);
     }
 
-    public function files()
+    public function files() // todo: specify the return type
     {
         return $this->morphMany(File::class , 'foreign');
     }
 
-    public function owner()
+    public function owner() // todo: specify the return type
     {
         return $this->project_users()->where('rule' , '=' , 'owner')->first();
     }

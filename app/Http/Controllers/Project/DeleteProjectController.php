@@ -11,12 +11,13 @@ use Illuminate\Http\Response;
 
 class DeleteProjectController extends Controller
 {
+    // todo: delete unused element | specify the return type
     public function __invoke(DeleteProjectRequest $request , Project $project , DeleteProjectServiceInterface $deleteProjectService)
     {
         $data = RequestDeleteProjectDTO::fromRequest(
             project: $project
         );
         $responseData =  $deleteProjectService->delete($data);
-        return Response::success($responseData);
+        return Response::success($responseData); // todo: add @property
     }
 }

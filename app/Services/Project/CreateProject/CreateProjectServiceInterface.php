@@ -6,5 +6,5 @@ use App\DTO\Project\Request\RequestCreateProjectDTO;
 
 interface CreateProjectServiceInterface
 {
-    public function create(RequestCreateProjectDTO $request);
+    public function create(RequestCreateProjectDTO $request); // todo: specify return type
 }

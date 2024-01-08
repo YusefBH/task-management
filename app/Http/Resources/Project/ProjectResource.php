@@ -14,7 +14,7 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        return [ // todo: add @property
             'id' => (string)$this->id,
             'name' => $this->name,
             'description' => $this->description

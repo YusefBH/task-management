@@ -5,7 +5,7 @@ namespace App\DTO\Project\Request;
 use App\Models\Project;
 
 class RequestUpdateProjectDTO
-{
+{ // todo: ctrl+alt+l
     public function __construct(
         public readonly Project $project,
         public readonly string $name,
@@ -19,7 +19,7 @@ class RequestUpdateProjectDTO
     ):self
     {
         return new self(
-            $project,
+            $project, // todo: specify the item you are filling for example project: $project
             $name,
             $description
         );

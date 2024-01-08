@@ -8,7 +8,7 @@ use RuntimeException;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class ResponseProjectDTO
-{
+{ // todo: ctrl+alt+l
     public function __construct(
         public string $rule,
         public ProjectDTO $project
@@ -18,7 +18,7 @@ class ResponseProjectDTO
     {
         $projectDTO = ProjectDTO::fromModel($project);
         try {
-            return new self(
+            return new self( // todo: add @property
                 rule: $project_user->rule,
                 project: $projectDTO
             );

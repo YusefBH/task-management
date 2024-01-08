@@ -19,7 +19,7 @@ class IndexProjectService implements IndexProjectServiceInterface
         $pagination = $requestDTO->rule
             ? $user->getProjectsByRole($requestDTO->rule)->with('project')->paginate(5)
             :$user->user_projects()->with('project')->paginate(5);
-        $projects =$pagination
+        $projects =$pagination  // todo: do not cross the ide line
             ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser , project: $projectuser->project));
 
         return Pagination::fromModelPaginatorAndData(

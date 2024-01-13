@@ -4,6 +4,10 @@ namespace App\Http\Requests\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $name
+ * @property mixed $description
+ */
 class CreateProjectRequest extends FormRequest
 {
     /**

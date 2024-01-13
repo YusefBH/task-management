@@ -2,8 +2,6 @@
 
 namespace App\DTO\Project\Request;
 
-use Illuminate\Support\Arr; // todo: remove unused imports
-
 class RequestIndexProjectDTO
 {
 
@@ -13,10 +11,10 @@ class RequestIndexProjectDTO
 
     public static function fromRequest(
         ?string $rule
-    ):self
+    ): self
     {
         return new self(
-          rule : $rule
+            rule: $rule
         );
     }
 }

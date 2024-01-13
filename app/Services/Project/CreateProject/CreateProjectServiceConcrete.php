@@ -11,16 +11,16 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-// todo: better to use concrete in the end of service name for better readability
-class CreateProjectService implements CreateProjectServiceInterface
+
+class CreateProjectServiceConcrete implements CreateProjectServiceInterface
 {
     /**
      * @throws NotCreatedException
      */
-    public function create(RequestCreateProjectDTO $projectDTO)//: ResponseProjectDTO // todo: :(
+    public function create(RequestCreateProjectDTO $projectDTO): ResponseProjectDTO
     {
-        /** @var User $user */
-        $user = Auth::user(); // todo: delete unused variable
+
+        $user = Auth::user();
 
         DB::beginTransaction();
         try {
@@ -29,18 +29,17 @@ class CreateProjectService implements CreateProjectServiceInterface
                 'description' => $projectDTO->description,
             ]);
             $project_user = ProjectUser::create([
-                'rule' => 'owner',
-                'user_id' =>5862,
+                'rule' => ProjectUser::RULE_OWNER,
+                'user_id' => $user->id,
                 'project_id' => $project->id,
             ]); // todo: Use spatie permissions for project_user rule
 
             DB::commit();
 
-            return ResponseProjectDTO::fromModels(project_user: $project_user , project: $project);
-        }catch (Exception $exception){
+            return ResponseProjectDTO::fromModels(project_user: $project_user, project: $project);
+        } catch (Exception $exception) {
             DB::rollBack();
-            throw new NotCreatedException('project not created');
-            // todo: messages can be localized (its not necessary)
+            throw new NotCreatedException();
         }
     }
 }

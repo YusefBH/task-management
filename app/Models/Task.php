@@ -18,7 +18,7 @@ class Task extends Model
         'status',
     ];
 
-    public function project() : BelongsTo
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
@@ -28,13 +28,13 @@ class Task extends Model
         return $this->hasMany(Subtask::class);
     }
 
-    public function lable(): MorphOne // todo: avoid misspelling
+    public function label(): MorphOne
     {
-        return $this->morphOne(Lable::class , 'foreign');
+        return $this->morphOne(Label::class, 'foreign');
     }
 
     public function files(): MorphMany
     {
-        return $this->morphMany(Lable::class , 'foreign');
+        return $this->morphMany(Label::class, 'foreign');
     }
 }

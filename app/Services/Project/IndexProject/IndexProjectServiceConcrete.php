@@ -9,7 +9,7 @@ use App\Models\ProjectUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class IndexProjectService implements IndexProjectServiceInterface
+class IndexProjectServiceConcrete implements IndexProjectServiceInterface
 {
 
     public function index(RequestIndexProjectDTO $requestDTO): Pagination
@@ -17,10 +17,17 @@ class IndexProjectService implements IndexProjectServiceInterface
         /** @var User $user */
         $user = Auth::user();
         $pagination = $requestDTO->rule
-            ? $user->getProjectsByRole($requestDTO->rule)->with('project')->paginate(5)
-            :$user->user_projects()->with('project')->paginate(5);
-        $projects =$pagination  // todo: do not cross the ide line
-            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser , project: $projectuser->project));
+            ? $user->user_projects()
+                ->rule($requestDTO->rule)
+                ->with('project')
+                ->paginate(5)
+            : $user->user_projects()
+                ->with('project')
+                ->paginate(5);
+        $projects = $pagination->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(
+            project_user: $projectuser,
+            project: $projectuser->project
+        ));
 
         return Pagination::fromModelPaginatorAndData(
             paginator: $pagination, data: $projects->toArray()

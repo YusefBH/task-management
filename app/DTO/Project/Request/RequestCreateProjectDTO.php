@@ -2,20 +2,22 @@
 
 namespace App\DTO\Project\Request;
 
-class RequestCreateProjectDTO // todo: ctrl+alt+l
+class RequestCreateProjectDTO
 {
     public function __construct(
-        public readonly string $name,
+        public readonly string  $name,
         public readonly ?string $description
-    ){}
+    )
+    {
+    }
 
     public static function fromRequest(
-        string $name,
+        string  $name,
         ?string $description
-    ):self
+    ): self
     {
         return new self(
-            name : $name,description: $description
+            name: $name, description: $description
         );
     }
 }

@@ -5,6 +5,9 @@ namespace App\Http\Requests\Project;
 use App\Models\ProjectUser;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $rule
+ */
 class IndexProjectRequest extends FormRequest
 {
     /**

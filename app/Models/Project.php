@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
-use App\Models\ProjectUser; // todo: remove unused imports
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+/**
+ * @property mixed $id
+ * @property mixed $name
+ * @property mixed $description
+ * @method static create(array $array)
+ * @method static inRandomOrder()
+ */
 class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'description'
     ];
@@ -31,14 +38,14 @@ class Project extends Model
         return $this->hasMany(Task::class);
     }
 
-    public function files() // todo: specify the return type
+    public function files(): MorphMany
     {
-        return $this->morphMany(File::class , 'foreign');
+        return $this->morphMany(File::class, 'foreign');
     }
 
-    public function owner() // todo: specify the return type
+    public function owner(): Model|HasMany|null
     {
-        return $this->project_users()->where('rule' , '=' , 'owner')->first();
+        return $this->project_users()->where('rule', '=', ProjectUser::RULE_OWNER)->first();
     }
 
 }

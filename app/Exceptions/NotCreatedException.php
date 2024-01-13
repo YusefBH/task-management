@@ -14,7 +14,7 @@ class NotCreatedException extends Exception
     {
         Log::error($this);
         return response()->json([
-            'massage' => $this->getMessage(),
+            'massage' => 'project not created',
         ],500);
     }
 }

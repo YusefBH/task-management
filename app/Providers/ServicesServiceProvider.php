@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use App\Services\Project\CreateProject\CreateProjectServiceConcrete;
+use App\Services\Project\CreateProject\CreateProjectServiceInterface;
+use App\Services\Project\DeleteProject\DeleteProjectServiceConcrete;
+use App\Services\Project\DeleteProject\DeleteProjectServiceInterface;
+use App\Services\Project\IndexProject\IndexProjectServiceConcrete;
+use App\Services\Project\IndexProject\IndexProjectServiceInterface;
+use App\Services\Project\ShowProject\ShowProjectServiceConcrete;
+use App\Services\Project\ShowProject\ShowProjectServiceInterface;
+use App\Services\Project\UpdateProject\UpdateProjectServiceConcrete;
+use App\Services\Project\UpdateProject\UpdateProjectServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
@@ -19,25 +29,25 @@ class ServicesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind( // todo: do not address services manually use CreateProjectServiceInterface::class instead
-            'App\Services\Project\CreateProject\CreateProjectServiceInterface',
-            'App\Services\Project\CreateProject\CreateProjectService'
+        $this->app->bind(
+            CreateProjectServiceInterface::class,
+            CreateProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\DeleteProject\DeleteProjectServiceInterface',
-            'App\Services\Project\DeleteProject\DeleteProjectService'
+            DeleteProjectServiceInterface::class,
+            DeleteProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\IndexProject\IndexProjectServiceInterface',
-            'App\Services\Project\IndexProject\IndexProjectService'
+            IndexProjectServiceInterface::class,
+           IndexProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\ShowProject\ShowProjectServiceInterface',
-            'App\Services\Project\ShowProject\ShowProjectService'
+            ShowProjectServiceInterface::class,
+            ShowProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\UpdateProject\UpdateProjectServiceInterface',
-            'App\Services\Project\UpdateProject\UpdateProjectService'
+            UpdateProjectServiceInterface::class,
+            UpdateProjectServiceConcrete::class
         );
     }
 }

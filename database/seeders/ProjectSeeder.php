@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents; // todo: add @property
 use Illuminate\Database\Seeder;
 
 class ProjectSeeder extends Seeder
@@ -14,7 +13,7 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         for ($i =1; $i<8;$i++){
-            Project::create([ // todo: add @property
+            Project::create([
                'name' => 'project'.$i,
             ]);
         }

@@ -23,12 +23,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('projects')->middleware(['auth:sanctum' /*, 'verified'*/])->group(function () {//todo : verify check
-    Route::get('/', IndexProjectController::class);
-    Route::post('/', CreateProjectController::class);
-    Route::get('/{project}',  ShowProjectController::class);
-    Route::put('/{project}',  UpdateProjectController::class);
-    Route::delete('/{project}',  DeleteProjectController::class);
+Route::prefix('projects')->name('project.')->middleware(['auth:sanctum' /*, 'verified'*/])->group(function () {//todo : verify check
+    Route::get('/', IndexProjectController::class)->name('index');
+    Route::post('/', CreateProjectController::class)->name('create');
+    Route::get('/{project}',  ShowProjectController::class)->name('show');
+    Route::put('/{project}',  UpdateProjectController::class)->name('update');
+    Route::delete('/{project}',  DeleteProjectController::class)->name('delete');
 });
 
 require __DIR__.'/auth.php';

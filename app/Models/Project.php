@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Rule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -45,7 +46,7 @@ class Project extends Model
 
     public function owner(): Model|HasMany|null
     {
-        return $this->project_users()->where('rule', '=', ProjectUser::RULE_OWNER)->first();
+        return $this->project_users()->where('rule', '=', Rule::RULE_OWNER)->first();
     }
 
 }

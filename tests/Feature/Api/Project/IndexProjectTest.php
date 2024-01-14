@@ -5,11 +5,11 @@ namespace Tests\Feature\Api\Project;
 
 use App\DTO\Pagination\Pagination;
 use App\DTO\Project\ResponseProjectDTO;
+use App\Enums\Rule;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Response;
 use Tests\TestCase;
 
 /**
@@ -19,9 +19,6 @@ class IndexProjectTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     */
     public function test_return_all_user_projects_when_authenticated(): void
     {
         $user = User::factory()->createOne();
@@ -30,12 +27,12 @@ class IndexProjectTest extends TestCase
             ->create();
 
         foreach ($projects as $project) {
-            if(rand(0,30)%3 == 0)
-            ProjectUser::create([
-               'rule' => ProjectUser::RULE[rand(0 , count(ProjectUser::RULE)-1)],
-               'user_id' => $user->id,
-               'project_id' => $project->id,
-            ]);
+            if (rand(0, 30) % 3 == 0)
+                ProjectUser::create([
+                    'rule' => Rule::RULE[rand(0, count(Rule::RULE) - 1)],
+                    'user_id' => $user->id,
+                    'project_id' => $project->id,
+                ]);
         }
 
         $response = $this->actingAs($user)->call('GET', route('project.index'));
@@ -55,13 +52,14 @@ class IndexProjectTest extends TestCase
             ],
             'meta',
         ]);
+        /** @var User $user */
         $user_projects = $user->user_projects()->with('project')->paginate(5);
-        $user_projects_dto =$user_projects
-            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser , project: $projectuser->project));
+        $user_projects_dto = $user_projects
+            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser, project: $projectuser->project));
         $response_data = Pagination::fromModelPaginatorAndData(
             paginator: $user_projects, data: $user_projects_dto->toArray()
         );
-        $this->assertEquals($response->getOriginalContent() , $response_data);
+        $this->assertEquals($response->getOriginalContent(), $response_data);
     }
 
     public function test_return_all_user_projects_when_unauthenticated(): void
@@ -73,7 +71,7 @@ class IndexProjectTest extends TestCase
         $response->assertUnauthorized();
     }
 
-    public function test_return_user_projects_by_role()
+    public function test_return_user_projects_by_role(): void
     {
         $user = User::factory()->createOne();
         $projects = Project::factory()
@@ -81,17 +79,17 @@ class IndexProjectTest extends TestCase
             ->create();
 
         foreach ($projects as $project) {
-            if(rand(0,30)%3 == 0)
+            if (rand(0, 30) % 3 == 0)
                 ProjectUser::create([
-                    'rule' => ProjectUser::RULE[rand(0 , count(ProjectUser::RULE)-1)],
+                    'rule' => Rule::RULE[rand(0, count(Rule::RULE) - 1)],
                     'user_id' => $user->id,
                     'project_id' => $project->id,
                 ]);
         }
 
-        $rule = ProjectUser::RULE[rand(0 , count(ProjectUser::RULE)-1)];
+        $rule = Rule::RULE[rand(0, count(Rule::RULE) - 1)];
 
-        $response = $this->actingAs($user)->call('GET', route('project.index') , [
+        $response = $this->actingAs($user)->call('GET', route('project.index'), [
             'rule' => $rule,
         ]);
 
@@ -110,16 +108,20 @@ class IndexProjectTest extends TestCase
             ],
             'meta',
         ]);
-        $user_projects = $user->getProjectsByRole($rule)->with('project')->paginate(5);
-        $user_projects_dto =$user_projects
-            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser , project: $projectuser->project));
+
+        $user_projects = $user->user_projects()->rule($rule)->with('project')->paginate(5);
+        $user_projects_dto = $user_projects
+            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(
+                project_user: $projectuser,
+                project: $projectuser->project
+            ));
         $response_data = Pagination::fromModelPaginatorAndData(
             paginator: $user_projects, data: $user_projects_dto->toArray()
         );
-        $this->assertEquals($response->getOriginalContent() , $response_data);
+        $this->assertEquals($response->getOriginalContent(), $response_data);
     }
 
-    public function test_return_user_projects_for_users_who_do_not_have_a_project()
+    public function test_return_user_projects_for_users_who_do_not_have_a_project(): void
     {
         $user = User::factory()->createOne();
         $response = $this->actingAs($user)->call('GET', route('project.index'));
@@ -130,11 +132,11 @@ class IndexProjectTest extends TestCase
             ]
         ]);
         $user_projects = $user->user_projects()->with('project')->paginate(5);
-        $user_projects_dto =$user_projects
-            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser , project: $projectuser->project));
+        $user_projects_dto = $user_projects
+            ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(project_user: $projectuser, project: $projectuser->project));
         $response_data = Pagination::fromModelPaginatorAndData(
             paginator: $user_projects, data: $user_projects_dto->toArray()
         );
-        $this->assertEquals($response->getOriginalContent() , $response_data);
+        $this->assertEquals($response->getOriginalContent(), $response_data);
     }
 }

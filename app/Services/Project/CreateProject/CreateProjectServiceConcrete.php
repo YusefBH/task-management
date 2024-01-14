@@ -4,10 +4,10 @@ namespace App\Services\Project\CreateProject;
 
 use App\DTO\Project\Request\RequestCreateProjectDTO;
 use App\DTO\Project\ResponseProjectDTO;
+use App\Enums\Rule;
 use App\Exceptions\NotCreatedException;
 use App\Models\Project;
 use App\Models\ProjectUser;
-use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ class CreateProjectServiceConcrete implements CreateProjectServiceInterface
                 'description' => $projectDTO->description,
             ]);
             $project_user = ProjectUser::create([
-                'rule' => ProjectUser::RULE_OWNER,
+                'rule' => Rule::RULE_OWNER,
                 'user_id' => $user->id,
                 'project_id' => $project->id,
             ]); // todo: Use spatie permissions for project_user rule

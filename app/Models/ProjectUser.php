@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\Rule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property mixed $rule
@@ -16,12 +18,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ProjectUser extends Model
 {
     use HasFactory;
+    use HasRoles;
 
-    // todo: use enums
-    const RULE_OWNER = 'OWNER';
-    const RULE_MEMBER = 'MEMBER';
-    const RULE_VIEWER = 'VIEWER';
-    const RULE = [self::RULE_OWNER, self::RULE_MEMBER, self::RULE_VIEWER];
+    protected $casts = [
+        'RULE' => Rule::class,
+    ];
 
     protected $fillable = [
         'rule',

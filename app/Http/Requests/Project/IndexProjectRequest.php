@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Project;
 
+use App\Enums\Rule;
 use App\Models\ProjectUser;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,7 +17,7 @@ class IndexProjectRequest extends FormRequest
     public function authorize(): bool
     {
         if ($this->has('rule')) {
-            if (!in_array($this->input('rule'), ProjectUser::RULE)) {
+            if (!in_array($this->input('rule'), Rule::RULE)) {
                 return false;
             }
         }

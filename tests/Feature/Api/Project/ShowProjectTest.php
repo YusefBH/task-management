@@ -2,8 +2,7 @@
 
 namespace Tests\Feature\Api\Project;
 
-
-
+use App\Enums\Rule;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
@@ -13,9 +12,7 @@ use Tests\TestCase;
 class ShowProjectTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
+
     public function test_show_user_project_when_authenticated(): void
     {
         $user = User::factory()->createOne();
@@ -26,18 +23,18 @@ class ShowProjectTest extends TestCase
         foreach ($projects as $project) {
             if(rand(0,30)%3 == 0)
                 ProjectUser::create([
-                    'rule' => ProjectUser::RULE[rand(0 , count(ProjectUser::RULE)-1)],
+                    'rule' => Rule::RULE[rand(0 , count(Rule::RULE)-1)],
                     'user_id' => $user->id,
                     'project_id' => $project->id,
                 ]);
         }
         ProjectUser::create([
-            'rule' => ProjectUser::RULE_OWNER,
+            'rule' => Rule::RULE_OWNER,
             'user_id' => $user->id,
             'project_id' => $project->id,
         ]);
 
-        $myproject = $user->getProjectsByRole(ProjectUser::RULE_OWNER)->first();
+        $myproject = $user->user_projects()->rule(Rule::RULE_OWNER)->first();
 
         $response = $this->actingAs($user)->getJson(route('project.show' , [
             'project' => $myproject->project_id
@@ -45,7 +42,7 @@ class ShowProjectTest extends TestCase
 
         $response->assertOk();
         $response->assertJson([
-            "rule" => ProjectUser::RULE_OWNER,
+            "rule" => Rule::RULE_OWNER,
             "project" => [
                 "id" => $myproject->project_id,
                 "name"=> $myproject->project->name,
@@ -69,13 +66,13 @@ class ShowProjectTest extends TestCase
 
     }
 
-    public function test_show_another_user_project()
+    public function test_show_another_user_project(): void
     {
         $user = User::factory()->createOne();
         $another_user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         ProjectUser::create([
-            'rule' => ProjectUser::RULE_OWNER,
+            'rule' => Rule::RULE_OWNER,
             'user_id' => $another_user->id,
             'project_id' => $project->id,
         ]);
@@ -87,7 +84,7 @@ class ShowProjectTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function test_show_user_project_which_is_not_in_the_database()
+    public function test_show_user_project_which_is_not_in_the_database(): void
     {
         $user = User::factory()->createOne();
 

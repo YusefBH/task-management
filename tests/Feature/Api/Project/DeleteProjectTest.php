@@ -2,16 +2,17 @@
 
 namespace Tests\Feature\Api\Project;
 
+use App\Enums\Rule;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class DeleteProjectTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -20,7 +21,7 @@ class DeleteProjectTest extends TestCase
         $user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         $project_user = ProjectUser::create([
-            'rule' => ProjectUser::RULE_OWNER,
+            'rule' => Rule::RULE_OWNER,
             'user_id' => $user->id,
             'project_id' => $project->id,
         ]);
@@ -37,14 +38,14 @@ class DeleteProjectTest extends TestCase
         ]);
     }
 
-    public function test_delete_project_when_unauthenticated()
+    public function test_delete_project_when_unauthenticated(): void
     {
         $user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         $name = fake()->name();
         $description = fake()->text();
         ProjectUser::create([
-            'rule' => ProjectUser::RULE_OWNER,
+            'rule' => Rule::RULE_OWNER,
             'user_id' => $user->id,
             'project_id' => $project->id,
         ]);
@@ -58,23 +59,23 @@ class DeleteProjectTest extends TestCase
         ]);
     }
 
-    public function test_delete_another_user_project()
+    public function test_delete_another_user_project(): void
     {
         $user = User::factory()->createOne();
         $another_user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         ProjectUser::create([
-            'rule' => ProjectUser::RULE_OWNER,
+            'rule' => Rule::RULE_OWNER,
             'user_id' => $another_user->id,
             'project_id' => $project->id,
         ]);
 
-        $response = $this->actingAs($user)->deleteJson(route('project.delete', ['project' => $project->id]) );
+        $response = $this->actingAs($user)->deleteJson(route('project.delete', ['project' => $project->id]));
 
         $response->assertStatus(403);
     }
 
-    public function test_delete_user_project_which_is_not_in_the_database()
+    public function test_delete_user_project_which_is_not_in_the_database(): void
     {
         $user = User::factory()->createOne();
 

@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 
 class DeleteProjectController extends Controller
 {
-    public function __invoke(Project $project, DeleteProjectServiceInterface $deleteProjectService): JsonResponse
+    public function __invoke(DeleteProjectRequest $request, Project $project, DeleteProjectServiceInterface $deleteProjectService): JsonResponse
     {
         $data = RequestDeleteProjectDTO::fromRequest(
             project: $project

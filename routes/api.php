@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__ . '/auth.php';
+
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('projects')->name('project.')->middleware(['auth:sanctum' /*, 'verified'*/])->group(function () {//todo : verify check
+Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/', IndexProjectController::class)->name('index');
     Route::post('/', CreateProjectController::class)->name('create');
-    Route::get('/{project}',  ShowProjectController::class)->name('show');
-    Route::put('/{project}',  UpdateProjectController::class)->name('update');
-    Route::delete('/{project}',  DeleteProjectController::class)->name('delete');
+    Route::get('/{project}', ShowProjectController::class)->name('show');
+    Route::put('/{project}', UpdateProjectController::class)->name('update');
+    Route::delete('/{project}', DeleteProjectController::class)->name('delete');
 });
-
-require __DIR__.'/auth.php';

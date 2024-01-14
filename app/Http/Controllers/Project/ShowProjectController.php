@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 
 class ShowProjectController extends Controller
 {
-    public function __invoke(Project $project, ShowProjectServiceInterface $showProjectService): JsonResponse
+    public function __invoke(ShowProjectRequest $request, Project $project, ShowProjectServiceInterface $showProjectService): JsonResponse
     {
         $data = RequestShowProjectDTO::fromRequest($project);
         $response_data = $showProjectService->show($data);

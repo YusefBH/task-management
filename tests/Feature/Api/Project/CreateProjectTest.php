@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api\Project;
 
+use App\Enums\Rule;
 use App\Models\ProjectUser;
 use App\Models\User;
 
@@ -12,9 +13,6 @@ class CreateProjectTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     */
     public function test_create_project_when_authenticated(): void
     {
         $user = User::factory()->createOne();
@@ -36,7 +34,7 @@ class CreateProjectTest extends TestCase
             ]
         ]);
         $this->assertEquals(
-            ProjectUser::RULE_OWNER,
+            Rule::RULE_OWNER,
             $response->getOriginalContent()->rule
         );
         $this->assertEquals(
@@ -52,7 +50,7 @@ class CreateProjectTest extends TestCase
             'description' => $description
         ]);
         $this->assertDatabaseHas('project_users', [
-            'rule' => ProjectUser::RULE_OWNER,
+            'rule' => Rule::RULE_OWNER,
             'user_id' => $user->id,
             'project_id' => $response->getOriginalContent()->project->id
         ]);
@@ -60,7 +58,7 @@ class CreateProjectTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_create_project_when_unauthenticated(){
+    public function test_create_project_when_unauthenticated(): void{
         $name = fake()->name();
         $description = fake()->text();
         $response = $this->withHeaders([
@@ -75,7 +73,7 @@ class CreateProjectTest extends TestCase
         ]);
     }
 
-    public function test_create_project_when_name_is_null(){
+    public function test_create_project_when_name_is_null(): void{
         $user = User::factory()->createOne();
         $name = null;
         $description = fake()->text();

@@ -39,7 +39,8 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
 Route::prefix('projects/{project}/invitation')->name('invitation.')->middleware(['auth:sanctum', 'verified'])->group(function () {
     //Route::get('/', IndexInvitationController::class)->name('index');
     Route::post('/', CreateInvitationController::class)->name('create');
-    Route::get('/{hash}', AcceptInvitationController::class)->name('user.to.project');
-    //Route::get('/{project}', ShowInvitationController::class)->name('show');
+    Route::get('/{invitation}/{hash}', AcceptInvitationController::class)->name('user.to.project');
 });
+
+
 

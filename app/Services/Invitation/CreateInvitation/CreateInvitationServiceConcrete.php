@@ -4,7 +4,7 @@ namespace App\Services\Invitation\CreateInvitation;
 
 use App\DTO\Invitation\Request\RequestCreateInvitationDTO;
 use App\DTO\Invitation\ResponseInvitationDTO;
-use App\Exceptions\InvitationErrorException;
+use App\Exceptions\Invitation\InvitationErrorException;
 use App\Mail\InviteUserToProject;
 use App\Models\Invitation;
 use Exception;
@@ -32,7 +32,8 @@ class CreateInvitationServiceConcrete implements CreateInvitationServiceInterfac
                 'invitation.user.to.project',
                 Carbon::now()->addDays(10),
                 [
-                    'project' => $invitation->id,
+                    'project' =>$invitationDTO->project->id,
+                    'invitation' => $invitation->id,
                     'hash' => sha1($invitationDTO->email . $invitationDTO->role),
                 ]
             );

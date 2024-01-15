@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Invitation;
 
+use App\Models\Invitation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AcceptInvitationRequest extends FormRequest
@@ -11,7 +12,11 @@ class AcceptInvitationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        $invitation = Invitation::find($this->route('invitation'))->first();
+
+        $hash = sha1($invitation->email.$invitation->role);
+
+        return hash_equals($hash, (string)$this->route('hash'));
     }
 
     /**

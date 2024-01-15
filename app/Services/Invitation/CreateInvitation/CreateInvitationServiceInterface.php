@@ -7,5 +7,5 @@ use App\DTO\Invitation\ResponseInvitationDTO;
 
 interface CreateInvitationServiceInterface
 {
-    public function create(RequestCreateInvitationDTO $invitationDTO);//todo:ResponseInvitationDTO;
+    public function create(RequestCreateInvitationDTO $invitationDTO): ResponseInvitationDTO;
 }

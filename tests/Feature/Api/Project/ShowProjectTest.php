@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\Project;
 
-use App\Enums\Rule;
+use App\Enums\Role;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
@@ -23,18 +23,18 @@ class ShowProjectTest extends TestCase
         foreach ($projects as $project) {
             if(rand(0,30)%3 == 0)
                 ProjectUser::create([
-                    'rule' => Rule::RULE[rand(0 , count(Rule::RULE)-1)],
+                    'role' => Role::ROLE[rand(0 , count(Role::ROLE)-1)],
                     'user_id' => $user->id,
                     'project_id' => $project->id,
                 ]);
         }
         ProjectUser::create([
-            'rule' => Rule::RULE_OWNER,
+            'role' => Role::ROLE_OWNER,
             'user_id' => $user->id,
             'project_id' => $project->id,
         ]);
 
-        $myproject = $user->user_projects()->rule(Rule::RULE_OWNER)->first();
+        $myproject = $user->user_projects()->role(Role::ROLE_OWNER)->first();
 
         $response = $this->actingAs($user)->getJson(route('project.show' , [
             'project' => $myproject->project_id
@@ -42,7 +42,7 @@ class ShowProjectTest extends TestCase
 
         $response->assertOk();
         $response->assertJson([
-            "rule" => Rule::RULE_OWNER,
+            "role" => Role::ROLE_OWNER,
             "project" => [
                 "id" => $myproject->project_id,
                 "name"=> $myproject->project->name,
@@ -72,7 +72,7 @@ class ShowProjectTest extends TestCase
         $another_user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         ProjectUser::create([
-            'rule' => Rule::RULE_OWNER,
+            'role' => Role::ROLE_OWNER,
             'user_id' => $another_user->id,
             'project_id' => $project->id,
         ]);

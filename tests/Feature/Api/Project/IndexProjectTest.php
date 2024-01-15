@@ -5,7 +5,7 @@ namespace Tests\Feature\Api\Project;
 
 use App\DTO\Pagination\Pagination;
 use App\DTO\Project\ResponseProjectDTO;
-use App\Enums\Rule;
+use App\Enums\Role;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
@@ -29,7 +29,7 @@ class IndexProjectTest extends TestCase
         foreach ($projects as $project) {
             if (rand(0, 30) % 3 == 0)
                 ProjectUser::create([
-                    'rule' => Rule::RULE[rand(0, count(Rule::RULE) - 1)],
+                    'role' => Role::ROLE[rand(0, count(Role::ROLE) - 1)],
                     'user_id' => $user->id,
                     'project_id' => $project->id,
                 ]);
@@ -42,7 +42,7 @@ class IndexProjectTest extends TestCase
             'links',
             'data' => [
                 '*' => [
-                    'rule',
+                    'role',
                     'project' => [
                         'id',
                         'name',
@@ -81,16 +81,16 @@ class IndexProjectTest extends TestCase
         foreach ($projects as $project) {
             if (rand(0, 30) % 3 == 0)
                 ProjectUser::create([
-                    'rule' => Rule::RULE[rand(0, count(Rule::RULE) - 1)],
+                    'role' => Role::ROLE[rand(0, count(Role::ROLE) - 1)],
                     'user_id' => $user->id,
                     'project_id' => $project->id,
                 ]);
         }
 
-        $rule = Rule::RULE[rand(0, count(Rule::RULE) - 1)];
+        $role = Role::ROLE[rand(0, count(Role::ROLE) - 1)];
 
         $response = $this->actingAs($user)->call('GET', route('project.index'), [
-            'rule' => $rule,
+            'role' => $role,
         ]);
 
         $response->assertOk();
@@ -98,7 +98,7 @@ class IndexProjectTest extends TestCase
             'links',
             'data' => [
                 '*' => [
-                    'rule',
+                    'role',
                     'project' => [
                         'id',
                         'name',
@@ -109,7 +109,7 @@ class IndexProjectTest extends TestCase
             'meta',
         ]);
 
-        $user_projects = $user->user_projects()->rule($rule)->with('project')->paginate(5);
+        $user_projects = $user->user_projects()->role($role)->with('project')->paginate(5);
         $user_projects_dto = $user_projects
             ->map(fn(ProjectUser $projectuser) => ResponseProjectDTO::fromModels(
                 project_user: $projectuser,

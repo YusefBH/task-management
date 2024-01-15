@@ -11,8 +11,9 @@ class Invitation extends Model
     use HasFactory;
 
     protected $fillable = [
-      'email',
-      'content',
+        'email',
+        'role',
+        'project_id',
     ];
 
     public function project(): BelongsTo

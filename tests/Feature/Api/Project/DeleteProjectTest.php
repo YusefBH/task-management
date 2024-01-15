@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\Project;
 
-use App\Enums\Rule;
+use App\Enums\Role;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
@@ -21,7 +21,7 @@ class DeleteProjectTest extends TestCase
         $user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         $project_user = ProjectUser::create([
-            'rule' => Rule::RULE_OWNER,
+            'role' => Role::ROLE_OWNER,
             'user_id' => $user->id,
             'project_id' => $project->id,
         ]);
@@ -45,7 +45,7 @@ class DeleteProjectTest extends TestCase
         $name = fake()->name();
         $description = fake()->text();
         ProjectUser::create([
-            'rule' => Rule::RULE_OWNER,
+            'role' => Role::ROLE_OWNER,
             'user_id' => $user->id,
             'project_id' => $project->id,
         ]);
@@ -65,7 +65,7 @@ class DeleteProjectTest extends TestCase
         $another_user = User::factory()->createOne();
         $project = Project::factory()->createOne();
         ProjectUser::create([
-            'rule' => Rule::RULE_OWNER,
+            'role' => Role::ROLE_OWNER,
             'user_id' => $another_user->id,
             'project_id' => $project->id,
         ]);

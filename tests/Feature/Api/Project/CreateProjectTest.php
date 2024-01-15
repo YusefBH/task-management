@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\Project;
 
-use App\Enums\Rule;
+use App\Enums\Role;
 use App\Models\ProjectUser;
 use App\Models\User;
 
@@ -26,7 +26,7 @@ class CreateProjectTest extends TestCase
         ]);
 
         $response->assertJsonStructure([
-            "rule",
+            "role",
             "project" => [
                 "id",
                 "name",
@@ -34,8 +34,8 @@ class CreateProjectTest extends TestCase
             ]
         ]);
         $this->assertEquals(
-            Rule::RULE_OWNER,
-            $response->getOriginalContent()->rule
+            Role::ROLE_OWNER,
+            $response->getOriginalContent()->role
         );
         $this->assertEquals(
             $name,
@@ -50,7 +50,7 @@ class CreateProjectTest extends TestCase
             'description' => $description
         ]);
         $this->assertDatabaseHas('project_users', [
-            'rule' => Rule::RULE_OWNER,
+            'role' => Role::ROLE_OWNER,
             'user_id' => $user->id,
             'project_id' => $response->getOriginalContent()->project->id
         ]);

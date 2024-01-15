@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Invitation\CreateInvitation\CreateInvitationServiceConcrete;
+use App\Services\Invitation\CreateInvitation\CreateInvitationServiceInterface;
 use App\Services\Project\CreateProject\CreateProjectServiceConcrete;
 use App\Services\Project\CreateProject\CreateProjectServiceInterface;
 use App\Services\Project\DeleteProject\DeleteProjectServiceConcrete;
@@ -48,6 +50,11 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             UpdateProjectServiceInterface::class,
             UpdateProjectServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            CreateInvitationServiceInterface::class,
+            CreateInvitationServiceConcrete::class
         );
     }
 }

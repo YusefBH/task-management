@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Invitation\AcceptInvitationController;
+use App\Http\Controllers\Invitation\CreateInvitationController;
 use App\Http\Controllers\Project\CreateProjectController;
 use App\Http\Controllers\Project\DeleteProjectController;
 use App\Http\Controllers\Project\IndexProjectController;
@@ -32,3 +34,12 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
     Route::put('/{project}', UpdateProjectController::class)->name('update');
     Route::delete('/{project}', DeleteProjectController::class)->name('delete');
 });
+
+
+Route::prefix('projects/{project}/invitation')->name('invitation.')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    //Route::get('/', IndexInvitationController::class)->name('index');
+    Route::post('/', CreateInvitationController::class)->name('create');
+    Route::get('/{hash}', AcceptInvitationController::class)->name('user.to.project');
+    //Route::get('/{project}', ShowInvitationController::class)->name('show');
+});
+

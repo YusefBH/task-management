@@ -25,6 +25,6 @@ class CreateService extends GeneratorCommand
     {
         $stub = parent::replaceClass($stub, $name);
 
-        return str_replace("hello", $this->argument('index') . $this->argument('model') . "Service", $stub);
+        return str_replace("hello", $this->argument('index') . $this->argument('model') . "ServiceConcrete", $stub);
     }
 }

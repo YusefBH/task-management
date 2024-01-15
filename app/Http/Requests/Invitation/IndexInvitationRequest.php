@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Invitation;
 
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class IndexInvitationRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class IndexInvitationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('showInvitation' , $this->project);
     }
 
     /**

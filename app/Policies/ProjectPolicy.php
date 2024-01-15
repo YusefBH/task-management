@@ -44,4 +44,14 @@ class ProjectPolicy
         }
         return false;
     }
+
+    public function showInvitation(User $user , Project $project): bool
+    {
+
+        $project_user =$project->owner();
+        if($project_user){
+            return $user->id === $project_user->user_id;
+        }
+        return false;
+    }
 }

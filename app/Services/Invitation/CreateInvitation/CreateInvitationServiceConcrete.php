@@ -2,8 +2,8 @@
 
 namespace App\Services\Invitation\CreateInvitation;
 
+use App\DTO\Invitation\InvitationDTO;
 use App\DTO\Invitation\Request\RequestCreateInvitationDTO;
-use App\DTO\Invitation\ResponseInvitationDTO;
 use App\Exceptions\Invitation\InvitationErrorException;
 use App\Mail\InviteUserToProject;
 use App\Models\Invitation;
@@ -18,7 +18,7 @@ class CreateInvitationServiceConcrete implements CreateInvitationServiceInterfac
     /**
      * @throws InvitationErrorException
      */
-    public function create(RequestCreateInvitationDTO $invitationDTO): ResponseInvitationDTO
+    public function create(RequestCreateInvitationDTO $invitationDTO): InvitationDTO
     {
         DB::beginTransaction();
         try {
@@ -32,7 +32,7 @@ class CreateInvitationServiceConcrete implements CreateInvitationServiceInterfac
                 'invitation.user.to.project',
                 Carbon::now()->addDays(10),
                 [
-                    'project' =>$invitationDTO->project->id,
+                    'project' => $invitationDTO->project->id,
                     'invitation' => $invitation->id,
                     'hash' => sha1($invitationDTO->email . $invitationDTO->role),
                 ]
@@ -42,7 +42,7 @@ class CreateInvitationServiceConcrete implements CreateInvitationServiceInterfac
                 ->send(new InviteUserToProject($new_url, $invitationDTO));
             DB::commit();
 
-            return ResponseInvitationDTO::fromModels(invitation: $invitation);
+            return InvitationDTO::fromModels(invitation: $invitation);
         } catch (Exception $exception) {
             DB::rollBack();
             throw new InvitationErrorException($exception->getMessage());

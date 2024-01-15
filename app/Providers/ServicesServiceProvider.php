@@ -6,6 +6,8 @@ use App\Services\Invitation\AcceptInvitation\AcceptInvitationServiceConcrete;
 use App\Services\Invitation\AcceptInvitation\AcceptInvitationServiceInterface;
 use App\Services\Invitation\CreateInvitation\CreateInvitationServiceConcrete;
 use App\Services\Invitation\CreateInvitation\CreateInvitationServiceInterface;
+use App\Services\Invitation\IndexInvitation\IndexInvitationServiceConcrete;
+use App\Services\Invitation\IndexInvitation\IndexInvitationServiceInterface;
 use App\Services\Project\CreateProject\CreateProjectServiceConcrete;
 use App\Services\Project\CreateProject\CreateProjectServiceInterface;
 use App\Services\Project\DeleteProject\DeleteProjectServiceConcrete;
@@ -43,7 +45,7 @@ class ServicesServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             IndexProjectServiceInterface::class,
-           IndexProjectServiceConcrete::class
+            IndexProjectServiceConcrete::class
         );
         $this->app->bind(
             ShowProjectServiceInterface::class,
@@ -58,10 +60,13 @@ class ServicesServiceProvider extends ServiceProvider
             CreateInvitationServiceInterface::class,
             CreateInvitationServiceConcrete::class
         );
-
         $this->app->bind(
             AcceptInvitationServiceInterface::class,
             AcceptInvitationServiceConcrete::class
+        );
+        $this->app->bind(
+            IndexInvitationServiceInterface::class,
+            IndexInvitationServiceConcrete::class
         );
     }
 }

@@ -10,7 +10,7 @@ use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 class ResponseProjectDTO
 {
     public function __construct(
-        public string     $rule,
+        public string     $role,
         public ProjectDTO $project
     )
     {
@@ -21,7 +21,7 @@ class ResponseProjectDTO
         $projectDTO = ProjectDTO::fromModel($project);
         try {
             return new self(
-                rule: $project_user->rule,
+                role: $project_user->role,
                 project: $projectDTO
             );
         } catch (UnknownProperties $e) {

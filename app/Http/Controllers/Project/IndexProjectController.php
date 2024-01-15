@@ -14,9 +14,9 @@ class IndexProjectController extends Controller
 {
     public function __invoke(IndexProjectRequest $request, IndexProjectServiceInterface $projectService): JsonResponse
     {
-        if ($request->has('rule')) {
+        if ($request->has('role')) {
             $data = RequestIndexProjectDTO::fromRequest(
-                $request->rule
+                $request->role
             );
         } else {
             $data = RequestIndexProjectDTO::fromRequest(

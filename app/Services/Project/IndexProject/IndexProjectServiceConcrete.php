@@ -16,9 +16,9 @@ class IndexProjectServiceConcrete implements IndexProjectServiceInterface
     {
         /** @var User $user */
         $user = Auth::user();
-        $pagination = $requestDTO->rule
+        $pagination = $requestDTO->role
             ? $user->user_projects()
-                ->rule($requestDTO->rule)
+                ->role($requestDTO->role)
                 ->with('project')
                 ->paginate(5)
             : $user->user_projects()

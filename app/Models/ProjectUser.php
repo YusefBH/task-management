@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Rule;
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,11 +21,11 @@ class ProjectUser extends Model
     use HasRoles;
 
     protected $casts = [
-        'RULE' => Rule::class,
+        'ROLE' => Role::class,
     ];
 
     protected $fillable = [
-        'rule',
+        'role',
         'user_id',
         'project_id',
     ];
@@ -45,8 +45,8 @@ class ProjectUser extends Model
         return $this->hasMany(Subtask::class);
     }
 
-    public function scopeRule(Builder $query, $rule): void
+    public function scopeRole(Builder $query, $role): void
     {
-        $query->where('rule', $rule);
+        $query->where('role', $role);
     }
 }

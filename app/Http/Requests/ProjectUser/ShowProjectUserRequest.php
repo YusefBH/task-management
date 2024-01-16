@@ -12,7 +12,7 @@ class ShowProjectUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('IsThereUserInProject', $this->project)
+        return Gate::forUser($this->user)->allows('IsThereUserInProject', $this->project)
             and Gate::allows('checkOwner', $this->project);
     }
 

@@ -20,6 +20,7 @@ class ShowProjectUserController extends Controller
     {
         $data = RequestShowProjectUserDTO::fromRequest(
             user: $user,
+            project: $project,
         );
 
         $responseData = $showProjectUserService->show($data);

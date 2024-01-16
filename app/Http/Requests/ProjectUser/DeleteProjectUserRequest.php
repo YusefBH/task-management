@@ -3,6 +3,7 @@
 namespace App\Http\Requests\ProjectUser;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class DeleteProjectUserRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class DeleteProjectUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::forUser($this->user)->allows('IsThereUserInProject', $this->project)
+            and Gate::allows('checkOwner', $this->project);
     }
 
     /**

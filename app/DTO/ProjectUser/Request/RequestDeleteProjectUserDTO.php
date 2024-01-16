@@ -2,20 +2,26 @@
 
 namespace App\DTO\ProjectUser\Request;
 
+use App\Models\Project;
+use App\Models\User;
+
 class RequestDeleteProjectUserDTO
 {
     public function __construct(
-        //public readonly string  $name,
+        public readonly User    $user,
+        public readonly Project $project
     )
     {
     }
 
     public static function fromRequest(
-        //string  $name,
+        User    $user,
+        Project $project,
     ): self
     {
         return new self(
-            //name: $name
+            user: $user,
+            project: $project
         );
     }
 }

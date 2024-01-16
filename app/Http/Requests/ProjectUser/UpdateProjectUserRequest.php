@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\ProjectUser;
 
+use App\Enums\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class UpdateProjectUserRequest extends FormRequest
 {
@@ -11,7 +14,8 @@ class UpdateProjectUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('IsThereUserInProject', $this->project)
+            and Gate::allows('checkOwner', $this->project);
     }
 
     /**
@@ -22,7 +26,7 @@ class UpdateProjectUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'role' => ['required' , Rule::in([Role::ROLE_MEMBER , Role::ROLE_VIEWER])],
         ];
     }
 }

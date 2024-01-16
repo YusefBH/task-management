@@ -42,7 +42,7 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
     Route::prefix('/{project}/users')->name('user.')->group(function () {
         Route::get('/', IndexProjectUserController::class)->name('index');
         Route::get('/{user}', ShowProjectUserController::class)->name('show');
-        //Route::put('/{user}', UpdateProjectUserController::class)->name('update');
+        Route::put('/{user}', UpdateProjectUserController::class)->name('update');
         //Route::delete('/{user}', DeleteProjectUserController::class)->name('delete');
     });
 });

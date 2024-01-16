@@ -8,6 +8,10 @@ use App\Http\Controllers\Project\DeleteProjectController;
 use App\Http\Controllers\Project\IndexProjectController;
 use App\Http\Controllers\Project\ShowProjectController;
 use App\Http\Controllers\Project\UpdateProjectController;
+use App\Http\Controllers\ProjectUser\DeleteProjectUserController;
+use App\Http\Controllers\ProjectUser\IndexProjectUserController;
+use App\Http\Controllers\ProjectUser\ShowProjectUserController;
+use App\Http\Controllers\ProjectUser\UpdateProjectUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +38,13 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
     Route::get('/{project}', ShowProjectController::class)->name('show');
     Route::put('/{project}', UpdateProjectController::class)->name('update');
     Route::delete('/{project}', DeleteProjectController::class)->name('delete');
+
+    Route::prefix('/{project}/users')->name('user.')->group(function () {
+        Route::get('/', IndexProjectUserController::class)->name('index');
+        //Route::get('/{user}', ShowProjectUserController::class)->name('show');
+        //Route::put('/{user}', UpdateProjectUserController::class)->name('update');
+        //Route::delete('/{user}', DeleteProjectUserController::class)->name('delete');
+    });
 });
 
 

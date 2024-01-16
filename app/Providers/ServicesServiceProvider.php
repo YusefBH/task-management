@@ -18,6 +18,14 @@ use App\Services\Project\ShowProject\ShowProjectServiceConcrete;
 use App\Services\Project\ShowProject\ShowProjectServiceInterface;
 use App\Services\Project\UpdateProject\UpdateProjectServiceConcrete;
 use App\Services\Project\UpdateProject\UpdateProjectServiceInterface;
+use App\Services\ProjectUser\DeleteProjectUser\DeleteProjectUserServiceConcrete;
+use App\Services\ProjectUser\DeleteProjectUser\DeleteProjectUserServiceInterface;
+use App\Services\ProjectUser\IndexProjectUser\IndexProjectUserServiceConcrete;
+use App\Services\ProjectUser\IndexProjectUser\IndexProjectUserServiceInterface;
+use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceConcrete;
+use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceInterface;
+use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceConcrete;
+use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
@@ -67,6 +75,23 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             IndexInvitationServiceInterface::class,
             IndexInvitationServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            DeleteProjectUserServiceInterface::class,
+            DeleteProjectUserServiceConcrete::class
+        );
+        $this->app->bind(
+            IndexProjectUserServiceInterface::class,
+            IndexProjectUserServiceConcrete::class
+        );
+        $this->app->bind(
+            ShowProjectUserServiceInterface::class,
+            ShowProjectUserServiceConcrete::class
+        );
+        $this->app->bind(
+            UpdateProjectUserServiceInterface::class,
+            UpdateProjectUserServiceConcrete::class
         );
     }
 }

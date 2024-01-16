@@ -11,8 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * @property mixed $rule
  * @property mixed $project
+ * @property mixed $user
+ * @property mixed $role
  * @method static create(array $array)
  */
 class ProjectUser extends Model

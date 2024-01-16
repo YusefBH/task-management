@@ -2,20 +2,22 @@
 
 namespace App\DTO\ProjectUser\Request;
 
+use App\Models\User;
+
 class RequestShowProjectUserDTO
 {
     public function __construct(
-        //public readonly string  $name,
+        public readonly User $user,
     )
     {
     }
 
     public static function fromRequest(
-        //string  $name,
+        User $user,
     ): self
     {
         return new self(
-        //name: $name
+            user: $user
         );
     }
 }

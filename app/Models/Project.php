@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @property mixed $id
  * @property mixed $name
  * @property mixed $description
+ * @property mixed $project_users
  * @method static create(array $array)
  * @method static inRandomOrder()
  */

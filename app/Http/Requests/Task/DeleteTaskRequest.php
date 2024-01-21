@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Task;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class DeleteTaskRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class DeleteTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('checkOwner', $this->project)
+            and Gate::allows('IsThereTaskInProject', [$this->project, $this->task]);
     }
 
     /**

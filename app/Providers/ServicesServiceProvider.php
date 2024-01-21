@@ -28,6 +28,8 @@ use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceConcrete;
 use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceInterface;
 use App\Services\Task\CreateTask\CreateTaskServiceConcrete;
 use App\Services\Task\CreateTask\CreateTaskServiceInterface;
+use App\Services\Task\DeleteTask\DeleteTaskServiceConcrete;
+use App\Services\Task\DeleteTask\DeleteTaskServiceInterface;
 use App\Services\Task\IndexTask\IndexTaskServiceConcrete;
 use App\Services\Task\IndexTask\IndexTaskServiceInterface;
 use App\Services\Task\ShowTask\ShowTaskServiceConcrete;
@@ -120,6 +122,11 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             UpdateTaskServiceInterface::class,
             UpdateTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            DeleteTaskServiceInterface::class,
+            DeleteTaskServiceConcrete::class
         );
     }
 }

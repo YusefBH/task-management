@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
  * @property mixed $project_user_id
  * @property mixed $task_id
  * @property mixed $task
+ * @property mixed $label
  */
 class Subtask extends Model
 {

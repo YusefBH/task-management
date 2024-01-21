@@ -2,22 +2,22 @@
 
 namespace App\DTO\Subtask\Request;
 
+use App\Models\Task;
+
 class RequestIndexSubtaskDTO
 {
     public function __construct(
-        public readonly string  $name,
-        public readonly ?string $description
+        public readonly Task $task,
     )
     {
     }
 
     public static function fromRequest(
-        string  $name,
-        ?string $description
+        Task $task,
     ): self
     {
         return new self(
-            name: $name, description: $description
+            task: $task,
         );
     }
 }

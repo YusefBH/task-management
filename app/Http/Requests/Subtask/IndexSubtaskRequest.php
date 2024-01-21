@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Subtask;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class IndexSubtaskRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class IndexSubtaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('IsThereTaskInProject', [$this->project, $this->task]);
     }
 
     /**

@@ -4,9 +4,9 @@ namespace App\DTO\Subtask;
 
 use App\DTO\ProjectUser\ProjectUserDTO;
 use App\DTO\Task\TaskDTO;
+use App\Models\Label;
 use App\Models\ProjectUser;
 use App\Models\Subtask;
-use App\Models\Task;
 use App\Models\User;
 use RuntimeException;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
@@ -18,8 +18,9 @@ class SubtaskDTO
         public string         $name,
         public ?string        $description,
         public string         $deadline,
-        public ProjectUserDTO $projectUserDTO,
-        public TaskDTO        $taskDTO
+        public ProjectUserDTO $user,
+        public TaskDTO        $task,
+        public ?Label         $label,
     )
     {
     }
@@ -34,8 +35,9 @@ class SubtaskDTO
                 name: $subtask->name,
                 description: $subtask->description,
                 deadline: $subtask->deadline,
-                projectUserDTO: ProjectUserDTO::fromModel(User::find($user)),
-                taskDTO: TaskDTO::fromModel($subtask->task)
+                user: ProjectUserDTO::fromModel(User::find($user)),
+                task: TaskDTO::fromModel($subtask->task),
+                label: $subtask->label,
             );
         } catch (UnknownProperties $e) {
             throw  new RuntimeException($e->getMessage());

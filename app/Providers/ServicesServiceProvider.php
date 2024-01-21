@@ -26,6 +26,8 @@ use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceConcrete;
 use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceInterface;
 use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceConcrete;
 use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceInterface;
+use App\Services\Task\IndexTask\IndexTaskServiceConcrete;
+use App\Services\Task\IndexTask\IndexTaskServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
@@ -92,6 +94,11 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             UpdateProjectUserServiceInterface::class,
             UpdateProjectUserServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            IndexTaskServiceInterface::class,
+            IndexTaskServiceConcrete::class
         );
     }
 }

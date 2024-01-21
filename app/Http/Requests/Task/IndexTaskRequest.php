@@ -2,8 +2,13 @@
 
 namespace App\Http\Requests\Task;
 
+use App\Enums\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
+/**
+ * @property mixed $status
+ */
 class IndexTaskRequest extends FormRequest
 {
     /**
@@ -11,7 +16,12 @@ class IndexTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        if ($this->has('status')) {
+            if (!in_array($this->input('status'), TaskStatus::STATUS)) {
+                return false;
+            }
+        }
+        return Gate::allows('IsThereUserInProject', $this->project);
     }
 
     /**

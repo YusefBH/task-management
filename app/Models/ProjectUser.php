@@ -2,23 +2,31 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @property mixed $project
+ * @property mixed $user
+ * @property mixed $role
+ * @method static create(array $array)
+ */
 class ProjectUser extends Model
 {
     use HasFactory;
+    use HasRoles;
 
-    // todo: use enums
-    const RULE_OWNER = 'owner';
-    const RULE_MEMBER = 'member';
-    const RULE_Viewer = 'viewer';
-    const RULE = [self::RULE_OWNER , self::RULE_MEMBER , self::RULE_Viewer];
+    protected $casts = [
+        'ROLE' => Role::class,
+    ];
 
     protected $fillable = [
-        'rule',
+        'role',
         'user_id',
         'project_id',
     ];
@@ -36,5 +44,10 @@ class ProjectUser extends Model
     public function subtasks(): HasMany
     {
         return $this->hasMany(Subtask::class);
+    }
+
+    public function scopeRole(Builder $query, $role): void
+    {
+        $query->where('role', $role);
     }
 }

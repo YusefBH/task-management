@@ -178,6 +178,7 @@ return [
          */
         App\Providers\ServicesServiceProvider::class,
         App\Providers\ResponseServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*

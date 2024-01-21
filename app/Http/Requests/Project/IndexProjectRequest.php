@@ -2,9 +2,13 @@
 
 namespace App\Http\Requests\Project;
 
+use App\Enums\Role;
 use App\Models\ProjectUser;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $role
+ */
 class IndexProjectRequest extends FormRequest
 {
     /**
@@ -12,8 +16,8 @@ class IndexProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if ($this->has('rule')) {
-            if (!in_array($this->input('rule'), ProjectUser::RULE)) {
+        if ($this->has('role')) {
+            if (!in_array($this->input('role'), Role::ROLE)) {
                 return false;
             }
         }

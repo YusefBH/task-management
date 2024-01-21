@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Log;
 
 class NotCreatedException extends Exception
 {
-
-
     public function render(): JsonResponse
     {
         Log::error($this);
         return response()->json([
-            'massage' => $this->getMessage(),
+            'massage' => 'not created',
         ],500);
     }
 }

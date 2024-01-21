@@ -2,21 +2,19 @@
 
 namespace App\DTO\Project\Request;
 
-use Illuminate\Support\Arr; // todo: remove unused imports
-
 class RequestIndexProjectDTO
 {
 
-    public function __construct(public readonly ?string $rule)
+    public function __construct(public readonly ?string $role)
     {
     }
 
     public static function fromRequest(
-        ?string $rule
-    ):self
+        ?string $role
+    ): self
     {
         return new self(
-          rule : $rule
+            role: $role
         );
     }
 }

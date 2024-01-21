@@ -2,6 +2,40 @@
 
 namespace App\Providers;
 
+use App\Services\Invitation\AcceptInvitation\AcceptInvitationServiceConcrete;
+use App\Services\Invitation\AcceptInvitation\AcceptInvitationServiceInterface;
+use App\Services\Invitation\CreateInvitation\CreateInvitationServiceConcrete;
+use App\Services\Invitation\CreateInvitation\CreateInvitationServiceInterface;
+use App\Services\Invitation\IndexInvitation\IndexInvitationServiceConcrete;
+use App\Services\Invitation\IndexInvitation\IndexInvitationServiceInterface;
+use App\Services\Project\CreateProject\CreateProjectServiceConcrete;
+use App\Services\Project\CreateProject\CreateProjectServiceInterface;
+use App\Services\Project\DeleteProject\DeleteProjectServiceConcrete;
+use App\Services\Project\DeleteProject\DeleteProjectServiceInterface;
+use App\Services\Project\IndexProject\IndexProjectServiceConcrete;
+use App\Services\Project\IndexProject\IndexProjectServiceInterface;
+use App\Services\Project\ShowProject\ShowProjectServiceConcrete;
+use App\Services\Project\ShowProject\ShowProjectServiceInterface;
+use App\Services\Project\UpdateProject\UpdateProjectServiceConcrete;
+use App\Services\Project\UpdateProject\UpdateProjectServiceInterface;
+use App\Services\ProjectUser\DeleteProjectUser\DeleteProjectUserServiceConcrete;
+use App\Services\ProjectUser\DeleteProjectUser\DeleteProjectUserServiceInterface;
+use App\Services\ProjectUser\IndexProjectUser\IndexProjectUserServiceConcrete;
+use App\Services\ProjectUser\IndexProjectUser\IndexProjectUserServiceInterface;
+use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceConcrete;
+use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceInterface;
+use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceConcrete;
+use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceInterface;
+use App\Services\Task\CreateTask\CreateTaskServiceConcrete;
+use App\Services\Task\CreateTask\CreateTaskServiceInterface;
+use App\Services\Task\DeleteTask\DeleteTaskServiceConcrete;
+use App\Services\Task\DeleteTask\DeleteTaskServiceInterface;
+use App\Services\Task\IndexTask\IndexTaskServiceConcrete;
+use App\Services\Task\IndexTask\IndexTaskServiceInterface;
+use App\Services\Task\ShowTask\ShowTaskServiceConcrete;
+use App\Services\Task\ShowTask\ShowTaskServiceInterface;
+use App\Services\Task\UpdateTask\UpdateTaskServiceConcrete;
+use App\Services\Task\UpdateTask\UpdateTaskServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
@@ -19,25 +53,80 @@ class ServicesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind( // todo: do not address services manually use CreateProjectServiceInterface::class instead
-            'App\Services\Project\CreateProject\CreateProjectServiceInterface',
-            'App\Services\Project\CreateProject\CreateProjectService'
+        $this->app->bind(
+            CreateProjectServiceInterface::class,
+            CreateProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\DeleteProject\DeleteProjectServiceInterface',
-            'App\Services\Project\DeleteProject\DeleteProjectService'
+            DeleteProjectServiceInterface::class,
+            DeleteProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\IndexProject\IndexProjectServiceInterface',
-            'App\Services\Project\IndexProject\IndexProjectService'
+            IndexProjectServiceInterface::class,
+            IndexProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\ShowProject\ShowProjectServiceInterface',
-            'App\Services\Project\ShowProject\ShowProjectService'
+            ShowProjectServiceInterface::class,
+            ShowProjectServiceConcrete::class
         );
         $this->app->bind(
-            'App\Services\Project\UpdateProject\UpdateProjectServiceInterface',
-            'App\Services\Project\UpdateProject\UpdateProjectService'
+            UpdateProjectServiceInterface::class,
+            UpdateProjectServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            CreateInvitationServiceInterface::class,
+            CreateInvitationServiceConcrete::class
+        );
+        $this->app->bind(
+            AcceptInvitationServiceInterface::class,
+            AcceptInvitationServiceConcrete::class
+        );
+        $this->app->bind(
+            IndexInvitationServiceInterface::class,
+            IndexInvitationServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            DeleteProjectUserServiceInterface::class,
+            DeleteProjectUserServiceConcrete::class
+        );
+        $this->app->bind(
+            IndexProjectUserServiceInterface::class,
+            IndexProjectUserServiceConcrete::class
+        );
+        $this->app->bind(
+            ShowProjectUserServiceInterface::class,
+            ShowProjectUserServiceConcrete::class
+        );
+        $this->app->bind(
+            UpdateProjectUserServiceInterface::class,
+            UpdateProjectUserServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            IndexTaskServiceInterface::class,
+            IndexTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            CreateTaskServiceInterface::class,
+            CreateTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            ShowTaskServiceInterface::class,
+            ShowTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            UpdateTaskServiceInterface::class,
+            UpdateTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            DeleteTaskServiceInterface::class,
+            DeleteTaskServiceConcrete::class
         );
     }
 }

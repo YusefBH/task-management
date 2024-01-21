@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Middleware\VerifyCsrfToken; // todo: remove unused imports
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,9 +26,9 @@ class Subtask extends Model
         return $this->belongsTo(Task::class);
     }
 
-    public function lable() : MorphOne // todo: avoid misspelling
+    public function label(): MorphOne
     {
-        return $this->morphOne(Lable::class , 'foreign');
+        return $this->morphOne(Label::class, 'foreign');
     }
 
 }

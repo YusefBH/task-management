@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+/**
+ * @property mixed $id
+ * @property mixed $name
+ * @property mixed $email
+ * @method static create(array $array)
+ * @method static find(int $int)
+ */
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -55,9 +62,4 @@ class User extends Authenticatable
         return $this->hasMany(ProjectUser::class);
     }
 
-    // todo: use query scopes instead => https://laravel.com/docs/10.x/eloquent#query-scopes:~:text=%2D%3Eget()%3B-,Local%20Scopes,-Local%20scopes%20allow
-    public function getProjectsByRole($rule): HasMany
-    {
-        return $this->user_projects()->where('rule', $rule);
-    }
 }

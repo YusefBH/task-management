@@ -5,6 +5,10 @@ namespace App\Http\Requests\Project;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
+/**
+ * @property mixed $name
+ * @property mixed $description
+ */
 class UpdateProjectRequest extends FormRequest
 {
     /**

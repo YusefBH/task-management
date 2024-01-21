@@ -12,6 +12,7 @@ use App\Http\Controllers\ProjectUser\DeleteProjectUserController;
 use App\Http\Controllers\ProjectUser\IndexProjectUserController;
 use App\Http\Controllers\ProjectUser\ShowProjectUserController;
 use App\Http\Controllers\ProjectUser\UpdateProjectUserController;
+use App\Http\Controllers\Task\CreateTaskController;
 use App\Http\Controllers\Task\IndexTaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,7 +50,7 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
 
     Route::prefix('/{project}/tasks')->name('task.')->group(function () {
         Route::get('/', IndexTaskController::class)->name('index');
-//        Route::post('/', CreateProjectController::class)->name('create');
+        Route::post('/', CreateTaskController::class)->name('create');
 //        Route::get('/{task}', ShowProjectController::class)->name('show');
 //        Route::put('/{task}', UpdateProjectController::class)->name('update');
 //        Route::delete('/{task}', DeleteProjectController::class)->name('delete');

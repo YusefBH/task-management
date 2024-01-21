@@ -2,8 +2,15 @@
 
 namespace App\Http\Requests\Task;
 
+use App\Enums\TaskStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed $name
+ * @property mixed $status
+ */
 class CreateTaskRequest extends FormRequest
 {
     /**
@@ -11,7 +18,7 @@ class CreateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('checkOwner', $this->project);
     }
 
     /**
@@ -22,7 +29,9 @@ class CreateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:80',
+            'status' => ['required', Rule::in(TaskStatus::STATUS)],
+            //todo:: label validation
         ];
     }
 }

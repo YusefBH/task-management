@@ -12,6 +12,7 @@ use App\Http\Controllers\ProjectUser\DeleteProjectUserController;
 use App\Http\Controllers\ProjectUser\IndexProjectUserController;
 use App\Http\Controllers\ProjectUser\ShowProjectUserController;
 use App\Http\Controllers\ProjectUser\UpdateProjectUserController;
+use App\Http\Controllers\Subtask\IndexSubtaskController;
 use App\Http\Controllers\Task\CreateTaskController;
 use App\Http\Controllers\Task\DeleteTaskController;
 use App\Http\Controllers\Task\IndexTaskController;
@@ -57,6 +58,14 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
         Route::get('/{task}', ShowTaskController::class)->name('show');
         Route::put('/{task}', UpdateTaskController::class)->name('update');
         Route::delete('/{task}', DeleteTaskController::class)->name('delete');
+
+        Route::prefix('/{task}/subtasks')->name('subtask.')->group(function () {
+            Route::get('/', IndexSubtaskController::class)->name('index');
+ /*           Route::post('/', CreateSubtaskController::class)->name('create');
+            Route::get('/{subtask}', ShowSubtaskController::class)->name('show');
+            Route::put('/{subtask}', UpdateSubtaskController::class)->name('update');
+            Route::delete('/{subtask}', DeleteSubtaskController::class)->name('delete');*/
+        });
     });
 });
 
@@ -66,6 +75,5 @@ Route::prefix('projects/{project}/invitation')->name('invitation.')->middleware(
     Route::post('/', CreateInvitationController::class)->name('create');
     Route::get('/{invitation}/{hash}', AcceptInvitationController::class)->name('user.to.project');
 });
-
 
 

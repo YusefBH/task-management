@@ -26,6 +26,16 @@ use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceConcrete;
 use App\Services\ProjectUser\ShowProjectUser\ShowProjectUserServiceInterface;
 use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceConcrete;
 use App\Services\ProjectUser\UpdateProjectUser\UpdateProjectUserServiceInterface;
+use App\Services\Subtask\CreateSubtask\CreateSubtaskServiceConcrete;
+use App\Services\Subtask\CreateSubtask\CreateSubtaskServiceInterface;
+use App\Services\Subtask\DeleteSubtask\DeleteSubtaskServiceConcrete;
+use App\Services\Subtask\DeleteSubtask\DeleteSubtaskServiceInterface;
+use App\Services\Subtask\IndexSubtask\IndexSubtaskServiceConcrete;
+use App\Services\Subtask\IndexSubtask\IndexSubtaskServiceInterface;
+use App\Services\Subtask\ShowSubtask\ShowSubtaskServiceConcrete;
+use App\Services\Subtask\ShowSubtask\ShowSubtaskServiceInterface;
+use App\Services\Subtask\UpdateSubtask\UpdateSubtaskServiceConcrete;
+use App\Services\Subtask\UpdateSubtask\UpdateSubtaskServiceInterface;
 use App\Services\Task\CreateTask\CreateTaskServiceConcrete;
 use App\Services\Task\CreateTask\CreateTaskServiceInterface;
 use App\Services\Task\DeleteTask\DeleteTaskServiceConcrete;
@@ -127,6 +137,27 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             DeleteTaskServiceInterface::class,
             DeleteTaskServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            CreateSubtaskServiceInterface::class,
+            CreateSubtaskServiceConcrete::class
+        );
+        $this->app->bind(
+            DeleteSubtaskServiceInterface::class,
+            DeleteSubtaskServiceConcrete::class
+        );
+        $this->app->bind(
+            IndexSubtaskServiceInterface::class,
+            IndexSubtaskServiceConcrete::class
+        );
+        $this->app->bind(
+            ShowSubtaskServiceInterface::class,
+            ShowSubtaskServiceConcrete::class
+        );
+        $this->app->bind(
+            UpdateSubtaskServiceInterface::class,
+            UpdateSubtaskServiceConcrete::class
         );
     }
 }

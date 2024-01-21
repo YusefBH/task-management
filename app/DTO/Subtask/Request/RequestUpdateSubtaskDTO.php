@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DTO\Task;
+namespace App\DTO\Subtask\Request;
 
-class ResponseTaskDTO
+class RequestUpdateSubtaskDTO
 {
     public function __construct(public readonly array $data)
     {

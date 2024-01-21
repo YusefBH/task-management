@@ -12,7 +12,8 @@ class TaskDTO
         public string $id,
         public string $name,
         public string $status,
-        public string $project_id
+        public string $project_id,
+        //todo::label
     )
     {
     }
@@ -24,7 +25,7 @@ class TaskDTO
                 id: $task->id,
                 name: $task->name,
                 status: $task->status,
-                project_id:$task->project_id,
+                project_id: $task->project_id,
             );
         } catch (UnknownProperties $e) {
             throw  new RuntimeException($e->getMessage());

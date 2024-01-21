@@ -19,10 +19,10 @@ class InvitationDTO
 
     public static function fromModels(Invitation $invitation): InvitationDTO
     {
-        $project = ProjectDTO::fromModel($invitation->project);
+        $project = ProjectDTO::fromModel($invitation->project); // todo: add @property
         try {
             return new self(
-                email: $invitation->email,
+                email: $invitation->email, // todo: add @property
                 role: $invitation->role,
                 project: $project
             );

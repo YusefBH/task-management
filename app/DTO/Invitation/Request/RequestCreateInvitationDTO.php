@@ -20,7 +20,7 @@ class RequestCreateInvitationDTO
         Project $project
     ): self
     {
-        return new self(
+        return new self( // todo: put items in separate lines for better readability
             email: $email, role: $role, project: $project
         );
     }

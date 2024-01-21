@@ -16,7 +16,7 @@ class RequestCreateProjectDTO
         ?string $description
     ): self
     {
-        return new self(
+        return new self( // todo: put items in separate lines for better readability
             name: $name, description: $description
         );
     }

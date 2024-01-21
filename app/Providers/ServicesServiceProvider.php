@@ -32,6 +32,8 @@ use App\Services\Task\IndexTask\IndexTaskServiceConcrete;
 use App\Services\Task\IndexTask\IndexTaskServiceInterface;
 use App\Services\Task\ShowTask\ShowTaskServiceConcrete;
 use App\Services\Task\ShowTask\ShowTaskServiceInterface;
+use App\Services\Task\UpdateTask\UpdateTaskServiceConcrete;
+use App\Services\Task\UpdateTask\UpdateTaskServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
@@ -113,6 +115,11 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             ShowTaskServiceInterface::class,
             ShowTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            UpdateTaskServiceInterface::class,
+            UpdateTaskServiceConcrete::class
         );
     }
 }

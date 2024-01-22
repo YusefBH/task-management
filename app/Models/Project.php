@@ -50,4 +50,8 @@ class Project extends Model
         return $this->project_users()->where('role', '=', Role::ROLE_OWNER)->first();
     }
 
+    public function labels(): HasMany
+    {
+        return $this->hasMany(Label::class);
+    }
 }

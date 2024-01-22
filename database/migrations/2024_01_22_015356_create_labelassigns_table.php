@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('labels', function (Blueprint $table) {
+        Schema::create('label_assigns', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('color');
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('label_id');
+            $table->morphs('foreign');
             $table->timestamps();
 
-            $table->foreign('project_id')
+            $table->foreign('label_id')
                 ->references('id')
-                ->on('projects')
+                ->on('labels')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('labels');
+        Schema::dropIfExists('label_assigns');
     }
 };

@@ -8,6 +8,15 @@ use App\Services\Invitation\CreateInvitation\CreateInvitationServiceConcrete;
 use App\Services\Invitation\CreateInvitation\CreateInvitationServiceInterface;
 use App\Services\Invitation\IndexInvitation\IndexInvitationServiceConcrete;
 use App\Services\Invitation\IndexInvitation\IndexInvitationServiceInterface;
+use App\Services\Label\CreateLabel\CreateLabelServiceConcrete;
+use App\Services\Label\CreateLabel\CreateLabelServiceInterface;
+use App\Services\Label\DeleteLabel\DeleteLabelServiceConcrete;
+use App\Services\Label\DeleteLabel\DeleteLabelServiceInterface;
+use App\Services\Label\IndexLabel\IndexLabelServiceConcrete;
+use App\Services\Label\IndexLabel\IndexLabelServiceInterface;
+use App\Services\Label\ShowLabel\ShowLabelServiceConcrete;
+use App\Services\Label\ShowLabel\ShowLabelServiceInterface;
+use App\Services\Label\UpdateLabel\UpdateLabelServiceInterface;
 use App\Services\Project\CreateProject\CreateProjectServiceConcrete;
 use App\Services\Project\CreateProject\CreateProjectServiceInterface;
 use App\Services\Project\DeleteProject\DeleteProjectServiceConcrete;
@@ -36,6 +45,7 @@ use App\Services\Task\ShowTask\ShowTaskServiceConcrete;
 use App\Services\Task\ShowTask\ShowTaskServiceInterface;
 use App\Services\Task\UpdateTask\UpdateTaskServiceConcrete;
 use App\Services\Task\UpdateTask\UpdateTaskServiceInterface;
+use App\Services\UpdateLabelServiceConcrete;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider
@@ -127,6 +137,31 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             DeleteTaskServiceInterface::class,
             DeleteTaskServiceConcrete::class
+        );
+        ///////////////////////////////////////////////////////////////////////////////////////
+        $this->app->bind(
+            IndexLabelServiceInterface::class,
+            IndexLabelServiceConcrete::class
+        );
+
+        $this->app->bind(
+            CreateLabelServiceInterface::class,
+            CreateLabelServiceConcrete::class
+        );
+
+        $this->app->bind(
+            ShowLabelServiceInterface::class,
+            ShowLabelServiceConcrete::class
+        );
+
+        $this->app->bind(
+            UpdateLabelServiceInterface::class,
+            UpdateLabelServiceConcrete::class
+        );
+
+        $this->app->bind(
+            DeleteLabelServiceInterface::class,
+            DeleteLabelServiceConcrete::class
         );
     }
 }

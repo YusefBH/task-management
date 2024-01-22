@@ -30,9 +30,10 @@ class CreateLabelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color' => ['string', new ColorRule()],
+            'color' => ['string', 'required_without:title', new ColorRule()],
             'title' => [
                 'string',
+                'required_without:color',
                 Rule::unique('labels', 'title')
                     ->where('project_id', $this->project)
                     ->where('color', $this->color)

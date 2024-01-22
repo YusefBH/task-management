@@ -16,6 +16,7 @@ use App\Services\Label\IndexLabel\IndexLabelServiceConcrete;
 use App\Services\Label\IndexLabel\IndexLabelServiceInterface;
 use App\Services\Label\ShowLabel\ShowLabelServiceConcrete;
 use App\Services\Label\ShowLabel\ShowLabelServiceInterface;
+use App\Services\Label\UpdateLabel\UpdateLabelServiceConcrete;
 use App\Services\Label\UpdateLabel\UpdateLabelServiceInterface;
 use App\Services\Project\CreateProject\CreateProjectServiceConcrete;
 use App\Services\Project\CreateProject\CreateProjectServiceInterface;
@@ -45,7 +46,6 @@ use App\Services\Task\ShowTask\ShowTaskServiceConcrete;
 use App\Services\Task\ShowTask\ShowTaskServiceInterface;
 use App\Services\Task\UpdateTask\UpdateTaskServiceConcrete;
 use App\Services\Task\UpdateTask\UpdateTaskServiceInterface;
-use App\Services\UpdateLabelServiceConcrete;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesServiceProvider extends ServiceProvider

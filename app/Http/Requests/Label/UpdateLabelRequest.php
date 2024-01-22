@@ -2,16 +2,25 @@
 
 namespace App\Http\Requests\Label;
 
+use App\Rules\ColorRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed $color
+ * @property mixed $title
+ */
 class UpdateLabelRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('IsThereUserInProject', $this->project)
+            and Gate::allows('IsThereLabelInProject', [$this->project, $this->label]);
     }
 
     /**
@@ -22,7 +31,14 @@ class UpdateLabelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'color' => ['string', 'required_without:title', new ColorRule()],
+            'title' => [
+                'string',
+                'required_without:color',
+                Rule::unique('labels', 'title')
+                    ->where('project_id', $this->project)
+                    ->where('color', $this->color)
+            ]
         ];
     }
 }

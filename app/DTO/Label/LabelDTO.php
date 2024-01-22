@@ -10,8 +10,8 @@ class LabelDTO
 {
     public function __construct(
         public string $id,
-        public string $title,
-        public string $color,
+        public ?string $title,
+        public ?string $color,
         public string $project_id,
     )
     {

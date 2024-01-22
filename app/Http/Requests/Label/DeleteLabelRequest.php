@@ -16,7 +16,7 @@ class DeleteLabelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('IsThereUserInProject', $this->project)
+        return Gate::allows('checkOwner', $this->project)
             and Gate::allows('IsThereLabelInProject', [$this->project, $this->label]);
     }
 

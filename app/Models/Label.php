@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property mixed $id
  * @property mixed $color
  * @property mixed $title
+ * @method static create(array $array)
  */
 class Label extends Model
 {
@@ -18,6 +19,7 @@ class Label extends Model
     protected $fillable = [
         'color',
         'title',
+        'project_id',
     ];
 
     public function project():BelongsTo

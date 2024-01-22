@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property mixed $id
  * @property mixed $color
  * @property mixed $title
+ * @property mixed $project
  * @method static create(array $array)
  */
 class Label extends Model

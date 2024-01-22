@@ -12,6 +12,7 @@ class LabelDTO
         public string $id,
         public string $title,
         public string $color,
+        public string $project_id,
     )
     {
     }
@@ -23,6 +24,7 @@ class LabelDTO
                 id: $label->id,
                 title: $label->title,
                 color: $label->color,
+                project_id: $label->project->id
             );
         } catch (UnknownProperties $e) {
             throw  new RuntimeException($e->getMessage());

@@ -3,7 +3,12 @@
 namespace App\Http\Requests\Label;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
+/**
+ * @property mixed $label
+ * @property mixed $project
+ */
 class ShowLabelRequest extends FormRequest
 {
     /**
@@ -11,7 +16,8 @@ class ShowLabelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('IsThereUserInProject', $this->project)
+            and Gate::allows('IsThereLabelInProject', [$this->project, $this->label]);
     }
 
     /**

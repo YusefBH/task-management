@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 
+use App\Models\Label;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
@@ -71,5 +72,10 @@ class ProjectPolicy
     public function IsThereTaskInProject(User $user, Project $project , Task $task): bool
     {
         return $project->tasks()->pluck('id')->contains($task->id);
+    }
+
+    public function IsThereLabelInProject(User $user, Project $project , Label $label): bool
+    {
+        return $project->labels()->pluck('id')->contains($label->id);
     }
 }

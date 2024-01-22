@@ -9,6 +9,6 @@ class ShowLabelServiceConcrete implements ShowLabelServiceInterface
 {
     public function show(RequestShowLabelDTO $labelDTO): LabelDTO
     {
-        dd();
+        return LabelDTO::fromModel(label: $labelDTO->label);
     }
 }

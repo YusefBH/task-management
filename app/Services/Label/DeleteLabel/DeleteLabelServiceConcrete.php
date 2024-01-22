@@ -9,6 +9,9 @@ class DeleteLabelServiceConcrete implements DeleteLabelServiceInterface
 {
     public function delete(RequestDeleteLabelDTO $labelDTO): LabelDTO
     {
-        dd();
+        $label = $labelDTO->label;
+        $label->delete();
+
+        return LabelDTO::fromModel($label);
     }
 }

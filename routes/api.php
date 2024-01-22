@@ -69,7 +69,7 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
         Route::post('/', CreateLabelController::class)->name('create');
         Route::get('/{label}', ShowLabelController::class)->name('show');
         Route::put('/{label}', UpdateLabelController::class)->name('update');
-//        Route::delete('/{label}', DeleteLabelController::class)->name('delete');
+        Route::delete('/{label}', DeleteLabelController::class)->name('delete');
     });
 });
 

@@ -16,13 +16,13 @@ class LabelDTO
     {
     }
 
-    public static function fromModel(Label $task): LabelDTO
+    public static function fromModel(Label $label): LabelDTO
     {
         try {
             return new self(
-                id: $task->id,
-                title: $task->title,
-                color: $task->color,
+                id: $label->id,
+                title: $label->title,
+                color: $label->color,
             );
         } catch (UnknownProperties $e) {
             throw  new RuntimeException($e->getMessage());

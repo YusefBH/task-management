@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Label;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class IndexLabelRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class IndexLabelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('IsThereUserInProject', $this->project);
     }
 
     /**

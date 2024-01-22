@@ -3,6 +3,11 @@
 use App\Http\Controllers\Invitation\AcceptInvitationController;
 use App\Http\Controllers\Invitation\CreateInvitationController;
 use App\Http\Controllers\Invitation\IndexInvitationController;
+use App\Http\Controllers\Label\CreateLabelController;
+use App\Http\Controllers\Label\DeleteLabelController;
+use App\Http\Controllers\Label\IndexLabelController;
+use App\Http\Controllers\Label\ShowLabelController;
+use App\Http\Controllers\Label\UpdateLabelController;
 use App\Http\Controllers\Project\CreateProjectController;
 use App\Http\Controllers\Project\DeleteProjectController;
 use App\Http\Controllers\Project\IndexProjectController;
@@ -57,6 +62,14 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
         Route::get('/{task}', ShowTaskController::class)->name('show');
         Route::put('/{task}', UpdateTaskController::class)->name('update');
         Route::delete('/{task}', DeleteTaskController::class)->name('delete');
+    });
+
+    Route::prefix('/{project}/labels')->name('label.')->group(function () {
+        Route::get('/', IndexLabelController::class)->name('index');
+//        Route::post('/', CreateLabelController::class)->name('create');
+//        Route::get('/{label}', ShowLabelController::class)->name('show');
+//        Route::put('/{label}', UpdateLabelController::class)->name('update');
+//        Route::delete('/{label}', DeleteLabelController::class)->name('delete');
     });
 });
 

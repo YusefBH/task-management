@@ -24,6 +24,7 @@ class CreateTaskRequest extends FormRequest
     {
         if ($this->label_id) {
             $label = Label::find($this->label_id);
+            if(!$label){return false;}
             return Gate::allows('checkOwner', $this->project)
                 and Gate::allows('IsThereLabelInProject', [$this->project, $label]);
         } else {

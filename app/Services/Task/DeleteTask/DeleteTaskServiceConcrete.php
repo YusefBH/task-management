@@ -10,13 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class DeleteTaskServiceConcrete implements DeleteTaskServiceInterface
 {
+    /**
+     * @throws NotDeletedException
+     */
     public function delete(RequestDeleteTaskDTO $taskDTO): TaskDTO
     {
         DB::beginTransaction();
         try {
             $task = $taskDTO->task;
             $task_label = $task->task_label;
-            $task_label->delete();
+            if ($task_label)
+                $task_label->delete();
             $task->delete();
             DB::commit();
         } catch (Exception $exception) {

@@ -15,6 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property mixed $user
  * @property mixed $role
  * @method static create(array $array)
+ * @method static find(mixed $project_user_id)
  */
 class ProjectUser extends Model
 {

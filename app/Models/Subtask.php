@@ -7,13 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
+/**
+ * @property mixed $id
+ * @property mixed $name
+ * @property mixed $description
+ * @property mixed $deadline
+ * @property mixed $project_user_id
+ * @property mixed $task_id
+ * @property mixed $task
+ * @property mixed $label
+ */
 class Subtask extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'description',
         'deadline',
+        'project_user_id',
+        'task_id'
     ];
 
     public function project_user(): BelongsTo

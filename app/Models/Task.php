@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
  * @property mixed $name
  * @property mixed $status
  * @property mixed $project_id
+ * @property mixed $task_label
  */
 class Task extends Model
 {
@@ -36,9 +37,9 @@ class Task extends Model
         return $this->hasMany(Subtask::class);
     }
 
-    public function label(): MorphOne
+    public function task_label(): MorphOne
     {
-        return $this->morphOne(Label::class, 'foreign');
+        return $this->morphOne(Label_assign::class, 'foreign');
     }
 
     public function files(): MorphMany

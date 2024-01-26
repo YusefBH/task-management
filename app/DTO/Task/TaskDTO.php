@@ -2,6 +2,7 @@
 
 namespace App\DTO\Task;
 
+use App\DTO\Label\LabelDTO;
 use App\Models\Task;
 use RuntimeException;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
@@ -9,11 +10,11 @@ use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 class TaskDTO
 {
     public function __construct(
-        public string $id,
-        public string $name,
-        public string $status,
-        public string $project_id,
-        //todo::label
+        public string    $id,
+        public string    $name,
+        public string    $status,
+        public string    $project_id,
+        public ?LabelDTO $label,
     )
     {
     }
@@ -26,6 +27,7 @@ class TaskDTO
                 name: $task->name,
                 status: $task->status,
                 project_id: $task->project_id,
+                label: $task->task_label ? LabelDTO::fromModel(label: $task->task_label->label) : null,
             );
         } catch (UnknownProperties $e) {
             throw  new RuntimeException($e->getMessage());

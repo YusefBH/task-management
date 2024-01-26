@@ -2,6 +2,7 @@
 
 namespace App\DTO\Task\Request;
 
+use App\Models\Label;
 use App\Models\Task;
 
 class RequestUpdateTaskDTO
@@ -10,7 +11,7 @@ class RequestUpdateTaskDTO
         public readonly Task $task,
         public readonly string  $name,
         public readonly string $status,
-        //todo : label
+        public readonly ?Label $label,
     )
     {
     }
@@ -18,13 +19,15 @@ class RequestUpdateTaskDTO
     public static function fromRequest(
         Task $task,
         string  $name,
-        string $status
+        string $status,
+        ?Label $label,
     ): self
     {
         return new self(
             task: $task,
             name: $name,
-            status: $status
+            status: $status,
+            label: $label
         );
     }
 }

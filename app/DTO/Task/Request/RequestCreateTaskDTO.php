@@ -2,6 +2,7 @@
 
 namespace App\DTO\Task\Request;
 
+use App\Models\Label;
 use App\Models\Project;
 
 class RequestCreateTaskDTO
@@ -10,7 +11,7 @@ class RequestCreateTaskDTO
         public readonly string  $name,
         public readonly string  $status,
         public readonly Project $project,
-        //todo :: public readonly ?Label $label
+        public readonly ?Label  $label,
     )
     {
     }
@@ -18,13 +19,15 @@ class RequestCreateTaskDTO
     public static function fromRequest(
         string  $name,
         ?string $status,
-        Project $project
+        Project $project,
+        ?Label  $label,
     ): self
     {
         return new self(
             name: $name,
             status: $status,
-            project: $project
+            project: $project,
+            label: $label,
         );
     }
 }

@@ -42,6 +42,8 @@ use App\Services\Task\DeleteTask\DeleteTaskServiceConcrete;
 use App\Services\Task\DeleteTask\DeleteTaskServiceInterface;
 use App\Services\Task\IndexTask\IndexTaskServiceConcrete;
 use App\Services\Task\IndexTask\IndexTaskServiceInterface;
+use App\Services\Task\RemoveLabelTask\RemoveLabelTaskServiceConcrete;
+use App\Services\Task\RemoveLabelTask\RemoveLabelTaskServiceInterface;
 use App\Services\Task\ShowTask\ShowTaskServiceConcrete;
 use App\Services\Task\ShowTask\ShowTaskServiceInterface;
 use App\Services\Task\UpdateTask\UpdateTaskServiceConcrete;
@@ -137,6 +139,11 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             DeleteTaskServiceInterface::class,
             DeleteTaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            RemoveLabelTaskServiceInterface::class,
+            RemoveLabelTaskServiceConcrete::class
         );
         ///////////////////////////////////////////////////////////////////////////////////////
         $this->app->bind(

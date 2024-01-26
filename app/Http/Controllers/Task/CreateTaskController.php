@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Task;
 use App\DTO\Task\Request\RequestCreateTaskDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Task\CreateTaskRequest;
+use App\Models\Label;
 use App\Models\Project;
 use App\Services\Task\CreateTask\CreateTaskServiceInterface;
 use Illuminate\Http\JsonResponse;
@@ -20,7 +21,7 @@ class CreateTaskController extends Controller
             name: $request->name,
             status: $request->status,
             project: $project,
-        //todo : label
+            label: $request->label_id ? Label::find($request->label_id) : null,
         );
         $response_data = $createTaskService->create($data);
 

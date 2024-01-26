@@ -20,6 +20,7 @@ use App\Http\Controllers\ProjectUser\UpdateProjectUserController;
 use App\Http\Controllers\Task\CreateTaskController;
 use App\Http\Controllers\Task\DeleteTaskController;
 use App\Http\Controllers\Task\IndexTaskController;
+use App\Http\Controllers\Task\RemoveLabelTaskController;
 use App\Http\Controllers\Task\ShowTaskController;
 use App\Http\Controllers\Task\UpdateTaskController;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
         Route::get('/{task}', ShowTaskController::class)->name('show');
         Route::put('/{task}', UpdateTaskController::class)->name('update');
         Route::delete('/{task}', DeleteTaskController::class)->name('delete');
+        Route::delete('/{task}/remove_label', RemoveLabelTaskController::class)->name('remove.label');
     });
 
     Route::prefix('/{project}/labels')->name('label.')->group(function () {

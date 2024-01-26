@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Label_assign extends Model
@@ -16,8 +17,13 @@ class Label_assign extends Model
         'foreign_id',
     ];
 
-    public function foreign():MorphTo
+    public function foreign(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function label(): BelongsTo
+    {
+        return $this->belongsTo(Label::class);
     }
 }

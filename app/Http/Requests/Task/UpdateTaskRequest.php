@@ -3,10 +3,19 @@
 namespace App\Http\Requests\Task;
 
 use App\Enums\TaskStatus;
+use App\Models\Label;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed $task
+ * @property mixed $project
+ * @property mixed $label
+ * @property mixed $label_id
+ * @property mixed $status
+ * @property mixed $name
+ */
 class UpdateTaskRequest extends FormRequest
 {
     /**
@@ -14,8 +23,16 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('checkOwner', $this->project)
-            and Gate::allows('IsThereTaskInProject', [$this->project, $this->task]);
+        if ($this->label_id) {
+            $label = Label::find($this->label_id);
+            return Gate::allows('checkOwner', $this->project)
+                and Gate::allows('IsThereTaskInProject', [$this->project, $this->task])
+                and Gate::allows('IsThereLabelInProject', [$this->project, $label]);
+        } else {
+            return Gate::allows('checkOwner', $this->project)
+                and Gate::allows('IsThereTaskInProject', [$this->project, $this->task]);
+
+        }
     }
 
     /**
@@ -28,7 +45,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'name' => 'required|string|max:80',
             'status' => ['required', Rule::in(TaskStatus::STATUS)],
-            //todo:: label validation
+            'label_id' => ['integer', Rule::exists('labels', 'id')]
         ];
     }
 }

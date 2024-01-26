@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
  * @property mixed $project
  * @property mixed $task
  */
-class DeleteTaskRequest extends FormRequest
+class RemoveLabelTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

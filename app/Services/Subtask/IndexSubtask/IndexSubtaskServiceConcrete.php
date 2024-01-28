@@ -16,7 +16,6 @@ class IndexSubtaskServiceConcrete implements IndexSubtaskServiceInterface
         $projects = $pagination->map(fn(Subtask $subtask) => SubtaskDTO::fromModel(
             subtask: $subtask
         ));
-        //todo :: label
         return Pagination::fromModelPaginatorAndData(
             paginator: $pagination, data: $projects->toArray()
         );

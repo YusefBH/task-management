@@ -5,6 +5,10 @@ namespace App\Http\Requests\Subtask;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
+/**
+ * @property mixed $project
+ * @property mixed $task
+ */
 class IndexSubtaskRequest extends FormRequest
 {
     /**
@@ -12,7 +16,8 @@ class IndexSubtaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Gate::allows('IsThereTaskInProject', [$this->project, $this->task]);
+        return Gate::allows('IsThereTaskInProject', [$this->project, $this->task])
+            and Gate::allows('IsThereUserInProject',$this->project);
     }
 
     /**

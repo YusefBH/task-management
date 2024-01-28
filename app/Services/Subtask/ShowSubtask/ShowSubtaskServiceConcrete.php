@@ -9,6 +9,6 @@ class ShowSubtaskServiceConcrete implements ShowSubtaskServiceInterface
 {
     public function show(RequestShowSubtaskDTO $subtaskDTO): SubtaskDTO
     {
-        dd();
+        return SubtaskDTO::fromModel(subtask: $subtaskDTO->subtask);
     }
 }

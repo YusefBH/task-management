@@ -6,7 +6,7 @@ use App\Models\Label;
 use RuntimeException;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class LabelDTO extends \App\Models\Label
+class LabelDTO
 {
     public function __construct(
         public string $id,

@@ -3,7 +3,13 @@
 namespace App\Http\Requests\Subtask;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
+/**
+ * @property mixed $project
+ * @property mixed $task
+ * @property mixed $subtask
+ */
 class ShowSubtaskRequest extends FormRequest
 {
     /**
@@ -11,7 +17,9 @@ class ShowSubtaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Gate::allows('IsThereUserInProject', $this->project)
+            and Gate::allows('IsThereTaskInProject', [$this->project, $this->task])
+            and Gate::allows('IsThereSubtaskInTask', [$this->task, $this->subtask]);
     }
 
     /**

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('subtasks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->timestamp('deadline');
+            $table->string('description')->nullable();
+            $table->string('deadline');
             $table->unsignedBigInteger('project_user_id');
             $table->unsignedBigInteger('task_id');
             $table->timestamps();

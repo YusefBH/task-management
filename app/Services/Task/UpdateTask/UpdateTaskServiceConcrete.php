@@ -18,6 +18,7 @@ class UpdateTaskServiceConcrete implements UpdateTaskServiceInterface
             $task_label = $task->task_label;
             if ($task_label) {
                 $task_label->label_id = $taskDTO->label->id;
+                $task_label->save();
             } else {
                 Label_assign::create([
                     'label_id' => $taskDTO->label->id,

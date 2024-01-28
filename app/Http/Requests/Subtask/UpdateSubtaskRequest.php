@@ -2,8 +2,23 @@
 
 namespace App\Http\Requests\Subtask;
 
+use App\Models\Label;
+use App\Models\User;
+use App\Rules\DaedlineRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed $user_id
+ * @property mixed $label_id
+ * @property mixed $project
+ * @property mixed $task
+ * @property mixed $subtask
+ * @property mixed $name
+ * @property mixed $description
+ * @property mixed $deadline
+ */
 class UpdateSubtaskRequest extends FormRequest
 {
     /**
@@ -11,7 +26,22 @@ class UpdateSubtaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        $user = User::find($this->user_id);
+        if(!$user){return false;}
+        if ($this->label_id) {
+            $label = Label::find($this->label_id);
+            if (!$label) {return false;}
+            return Gate::allows('checkOwner', $this->project)
+                and Gate::allows('IsThereLabelInProject', [$this->project, $label])
+                and Gate::allows('IsThereTaskInProject', [$this->project, $this->task])
+                and Gate::forUser($user)->allows('IsThereUserInProject', $this->project)
+                and Gate::allows('IsThereSubtaskInTask', [$this->task, $this->subtask]);
+        } else {
+            return Gate::allows('checkOwner', $this->project)
+                and Gate::allows('IsThereTaskInProject', [$this->project, $this->task])
+                and Gate::forUser($user)->allows('IsThereUserInProject', $this->project)
+                and Gate::allows('IsThereSubtaskInTask', [$this->task, $this->subtask]);
+        }
     }
 
     /**
@@ -22,7 +52,11 @@ class UpdateSubtaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:80',
+            'description' => 'string',
+            'deadline' => ['required','integer', new DaedlineRule()],
+            'label_id' => ['integer', Rule::exists('labels', 'id')],
+            'user_id' => ['required','integer', Rule::exists('users', 'id')],
         ];
     }
 }

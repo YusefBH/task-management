@@ -18,6 +18,7 @@ use App\Http\Controllers\ProjectUser\IndexProjectUserController;
 use App\Http\Controllers\ProjectUser\ShowProjectUserController;
 use App\Http\Controllers\ProjectUser\UpdateProjectUserController;
 use App\Http\Controllers\Subtask\CreateSubtaskController;
+use App\Http\Controllers\Subtask\DeleteSubtaskController;
 use App\Http\Controllers\Subtask\IndexSubtaskController;
 use App\Http\Controllers\Subtask\ShowSubtaskController;
 use App\Http\Controllers\Subtask\UpdateSubtaskController;
@@ -75,7 +76,7 @@ Route::prefix('projects')->name('project.')->middleware(['auth:sanctum', 'verifi
             Route::post('/', CreateSubtaskController::class)->name('create');
             Route::get('/{subtask}', ShowSubtaskController::class)->name('show');
             Route::put('/{subtask}', UpdateSubtaskController::class)->name('update');
-//            Route::delete('/{subtask}', DeleteSubtaskController::class)->name('delete');
+            Route::delete('/{subtask}', DeleteSubtaskController::class)->name('delete');
         });
     });
 

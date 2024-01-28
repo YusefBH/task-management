@@ -2,22 +2,22 @@
 
 namespace App\DTO\Subtask\Request;
 
+use App\Models\Subtask;
+
 class RequestDeleteSubtaskDTO
 {
     public function __construct(
-        public readonly string  $name,
-        public readonly ?string $description
+        public readonly Subtask $subtask
     )
     {
     }
 
     public static function fromRequest(
-        string  $name,
-        ?string $description
+        Subtask $subtask,
     ): self
     {
         return new self(
-            name: $name, description: $description
+            subtask: $subtask,
         );
     }
 }

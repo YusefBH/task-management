@@ -1,0 +1,577 @@
+{
+    "/projects": {
+        "get": {
+            "links": {
+                "first": "http://localhost:8000/api/projects?page=1",
+                "last": "http://localhost:8000/api/projects?page=2",
+                "prev": null,
+                "next": "http://localhost:8000/api/projects?page=2"
+            },
+            "data": [
+                {
+                    "role": "MEMBER",
+                    "project": {
+                        "id": "11",
+                        "name": "project4",
+                        "description": null
+                    }
+                },
+                {
+                    "role": "OWNER",
+                    "project": {
+                        "id": "15",
+                        "name": "project_1",
+                        "description": "dsfvsvfs"
+                    }
+                },
+                {
+                    "role": "OWNER",
+                    "project": {
+                        "id": "16",
+                        "name": "project_1",
+                        "description": null
+                    }
+                },
+                {
+                    "role": "Viewer",
+                    "project": {
+                        "id": "17",
+                        "name": "project_1",
+                        "description": null
+                    }
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "to": 5,
+                "last_page": 2,
+                "links": [
+                    "http://localhost:8000/api/projects?page=1",
+                    "http://localhost:8000/api/projects?page=2"
+                ],
+                "path": "http://localhost:8000/api/projects",
+                "per_page": 4,
+                "total": 6
+            }
+        },
+        "post": {
+            "role": "OWNER",
+            "project": {
+                "id": "19",
+                "name": "project_1",
+                "description": null
+            }
+        }
+    },
+    "/projects/{ProjectId}": {
+        "get": {
+            "role": "OWNER",
+            "project": {
+                "id": "19",
+                "name": "project_1",
+                "description": null
+            }
+        },
+        "put": {
+            "id": "19",
+            "name": "updated project",
+            "description": null
+        },
+        "delete": {
+            "id": "19",
+            "name": "updated project",
+            "description": null
+        }
+    },
+    "/tasks": {
+        "get": {
+            "links": {
+                "first": "http://localhost:8000/api/projects/15/tasks?page=1",
+                "last": "http://localhost:8000/api/projects/15/tasks?page=2",
+                "prev": null,
+                "next": "http://localhost:8000/api/projects/15/tasks?page=2"
+            },
+            "data": [
+                {
+                    "id": "5",
+                    "name": "project_1",
+                    "status": "DOING",
+                    "project_id": "15",
+                    "label": null
+                },
+                {
+                    "id": "7",
+                    "name": "project_1",
+                    "status": "DOING",
+                    "project_id": "15",
+                    "label": {
+                        "id": "3",
+                        "title": "ui",
+                        "color": null,
+                        "project_id": "15"
+                    }
+                },
+                {
+                    "id": "9",
+                    "name": "project_1",
+                    "status": "TODO",
+                    "project_id": "15",
+                    "label": {
+                        "id": "3",
+                        "title": "ui",
+                        "color": null,
+                        "project_id": "15"
+                    }
+                },
+                {
+                    "id": "10",
+                    "name": "project_1",
+                    "status": "TODO",
+                    "project_id": "15",
+                    "label": {
+                        "id": "3",
+                        "title": "ui",
+                        "color": null,
+                        "project_id": "15"
+                    }
+                },
+                {
+                    "id": "11",
+                    "name": "project_1",
+                    "status": "TODO",
+                    "project_id": "15",
+                    "label": null
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "to": 5,
+                "last_page": 2,
+                "links": [
+                    "http://localhost:8000/api/projects/15/tasks?page=1",
+                    "http://localhost:8000/api/projects/15/tasks?page=2"
+                ],
+                "path": "http://localhost:8000/api/projects/15/tasks",
+                "per_page": 5,
+                "total": 10
+            }
+        },
+        "post": {
+            "id": "7",
+            "name": "project_1",
+            "status": "DOING",
+            "project_id": "15",
+            "label": {
+                "id": "3",
+                "title": "ui",
+                "color": null,
+                "project_id": "15"
+            }
+        }
+    },
+    "/tasks/{TaskId}": {
+        "get": {
+            "id": "7",
+            "name": "project_1",
+            "status": "DOING",
+            "project_id": "15",
+            "label": {
+                "id": "3",
+                "title": "ui",
+                "color": null,
+                "project_id": "15"
+            }
+        },
+        "put": {
+            "id": "7",
+            "name": "project_1",
+            "status": "DOING",
+            "project_id": "15",
+            "label": {
+                "id": "3",
+                "title": "ui",
+                "color": null,
+                "project_id": "15"
+            }
+        },
+        "delete": {
+            "id": "7",
+            "name": "project_1",
+            "status": "DOING",
+            "project_id": "15",
+            "label": {
+                "id": "3",
+                "title": "ui",
+                "color": null,
+                "project_id": "15"
+            }
+        }
+    },
+    "/tasks/{TaskId}/remove_label": {
+        "delete": {
+            "id": "19",
+            "name": "project_1",
+            "status": "TODO",
+            "project_id": "15",
+            "label": null
+        }
+    },
+    "/labels": {
+        "get": {
+            "links": {
+                "first": "http://localhost:8000/api/projects/15/labels?page=1",
+                "last": "http://localhost:8000/api/projects/15/labels?page=1",
+                "prev": null,
+                "next": null
+            },
+            "data": [
+                {
+                    "id": "3",
+                    "title": "ui",
+                    "color": null,
+                    "project_id": "15"
+                },
+                {
+                    "id": "4",
+                    "title": "frontend2",
+                    "color": "#123654",
+                    "project_id": "15"
+                },
+                {
+                    "id": "5",
+                    "title": "frontend2",
+                    "color": null,
+                    "project_id": "15"
+                },
+                {
+                    "id": "6",
+                    "title": "dds",
+                    "color": null,
+                    "project_id": "15"
+                },
+                {
+                    "id": "7",
+                    "title": "fdgdds",
+                    "color": null,
+                    "project_id": "15"
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "to": 5,
+                "last_page": 1,
+                "links": [
+                    "http://localhost:8000/api/projects/15/labels?page=1"
+                ],
+                "path": "http://localhost:8000/api/projects/15/labels",
+                "per_page": 5,
+                "total": 5
+            }
+        },
+        "post": {
+            "id": "4",
+            "title": "frontend2",
+            "color": "#123654",
+            "project_id": "15"
+        }
+    },
+    "/labels/{LabelId}": {
+        "get": {
+            "id": "4",
+            "title": "frontend2",
+            "color": "#123654",
+            "project_id": "15"
+        },
+        "put": {
+            "id": "4",
+            "title": "frontend2",
+            "color": "#123654",
+            "project_id": "15"
+        },
+        "delete": {
+            "id": "4",
+            "title": "frontend2",
+            "color": "#123654",
+            "project_id": "15"
+        }
+    },
+    "/subtasks": {
+        "get": {
+            "links": {
+                "first": "http://localhost:8000/api/projects/15/tasks/5/subtasks?page=1",
+                "last": "http://localhost:8000/api/projects/15/tasks/5/subtasks?page=1",
+                "prev": null,
+                "next": null
+            },
+            "data": [
+                {
+                    "id": "7",
+                    "name": "project_1",
+                    "description": "kjhhjksodnkds",
+                    "deadline": "85236478559",
+                    "user": {
+                        "id": "129",
+                        "name": "Dayana Lubowitz",
+                        "email": "cwitting@nitzsche.com"
+                    },
+                    "task": {
+                        "id": "5",
+                        "name": "project_1",
+                        "status": "DOING",
+                        "project_id": "15",
+                        "label": null
+                    },
+                    "label": {
+                        "id": "4",
+                        "title": "frontend2",
+                        "color": "#123654",
+                        "project_id": "15"
+                    }
+                },
+                {
+                    "id": "8",
+                    "name": "project_1",
+                    "description": "kjhhjksodnkds",
+                    "deadline": "85236478559",
+                    "user": {
+                        "id": "129",
+                        "name": "Dayana Lubowitz",
+                        "email": "cwitting@nitzsche.com"
+                    },
+                    "task": {
+                        "id": "5",
+                        "name": "project_1",
+                        "status": "DOING",
+                        "project_id": "15",
+                        "label": null
+                    },
+                    "label": {
+                        "id": "4",
+                        "title": "frontend2",
+                        "color": "#123654",
+                        "project_id": "15"
+                    }
+                },
+                {
+                    "id": "9",
+                    "name": "project_1",
+                    "description": "kjhhjksodnkds",
+                    "deadline": "85236478559",
+                    "user": {
+                        "id": "129",
+                        "name": "Dayana Lubowitz",
+                        "email": "cwitting@nitzsche.com"
+                    },
+                    "task": {
+                        "id": "5",
+                        "name": "project_1",
+                        "status": "DOING",
+                        "project_id": "15",
+                        "label": null
+                    },
+                    "label": null
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "to": 1,
+                "last_page": 1,
+                "links": [
+                    "http://localhost:8000/api/projects/15/tasks/5/subtasks?page=1"
+                ],
+                "path": "http://localhost:8000/api/projects/15/tasks/5/subtasks",
+                "per_page": 5,
+                "total": 1
+            }
+        },
+        "post": {
+            "id": "7",
+            "name": "project_1",
+            "description": "kjhhjksodnkds",
+            "deadline": "85236478559",
+            "user": {
+                "id": "129",
+                "name": "Dayana Lubowitz",
+                "email": "cwitting@nitzsche.com"
+            },
+            "task": {
+                "id": "5",
+                "name": "project_1",
+                "status": "DOING",
+                "project_id": "15",
+                "label": null
+            },
+            "label": {
+                "id": "4",
+                "title": "frontend2",
+                "color": "#123654",
+                "project_id": "15"
+            }
+        }
+    },
+    "/subtasks/{SubtaskId}": {
+        "get": {
+            "id": "7",
+            "name": "project_1",
+            "description": "kjhhjksodnkds",
+            "deadline": "85236478559",
+            "user": {
+                "id": "129",
+                "name": "Dayana Lubowitz",
+                "email": "cwitting@nitzsche.com"
+            },
+            "task": {
+                "id": "5",
+                "name": "project_1",
+                "status": "DOING",
+                "project_id": "15",
+                "label": null
+            },
+            "label": {
+                "id": "4",
+                "title": "frontend2",
+                "color": "#123654",
+                "project_id": "15"
+            }
+        },
+        "put": {
+            "id": "7",
+            "name": "project_1",
+            "description": "kjhhjksodnkds",
+            "deadline": "85236478559",
+            "user": {
+                "id": "129",
+                "name": "Dayana Lubowitz",
+                "email": "cwitting@nitzsche.com"
+            },
+            "task": {
+                "id": "5",
+                "name": "project_1",
+                "status": "DOING",
+                "project_id": "15",
+                "label": null
+            },
+            "label": {
+                "id": "4",
+                "title": "frontend2",
+                "color": "#123654",
+                "project_id": "15"
+            }
+        },
+        "delete": {
+            "id": "7",
+            "name": "project_1",
+            "description": "kjhhjksodnkds",
+            "deadline": "85236478559",
+            "user": {
+                "id": "129",
+                "name": "Dayana Lubowitz",
+                "email": "cwitting@nitzsche.com"
+            },
+            "task": {
+                "id": "5",
+                "name": "project_1",
+                "status": "DOING",
+                "project_id": "15",
+                "label": null
+            },
+            "label": {
+                "id": "4",
+                "title": "frontend2",
+                "color": "#123654",
+                "project_id": "15"
+            }
+        }
+    },
+    "/subtasks/{SubtaskId}/remove_label": {
+        "delete": {
+            "id": "7",
+            "name": "project_1",
+            "description": "kjhhjksodnkds",
+            "deadline": "85236478559",
+            "user": {
+                "id": "129",
+                "name": "Dayana Lubowitz",
+                "email": "cwitting@nitzsche.com"
+            },
+            "task": {
+                "id": "5",
+                "name": "project_1",
+                "status": "DOING",
+                "project_id": "15",
+                "label": null
+            },
+            "label": null
+        }
+    },
+    "/projectsUsers": {
+        "get": {
+            "links": {
+                "first": "http://localhost:8000/api/projects/12/users?page=1",
+                "last": "http://localhost:8000/api/projects/12/users?page=1",
+                "prev": null,
+                "next": null
+            },
+            "data": [
+                {
+                    "role": "MEMBER",
+                    "user": {
+                        "id": "123",
+                        "name": "Tyshawn Erdman",
+                        "email": "moshe.stark@yahoo.com"
+                    }
+                },
+                {
+                    "role": "OWNER",
+                    "user": {
+                        "id": "100",
+                        "name": "yousef",
+                        "email": "yusefbh1382@gamil.com"
+                    }
+                }
+            ],
+            "meta": {
+                "current_page": 1,
+                "from": 1,
+                "to": 2,
+                "last_page": 1,
+                "links": [
+                    "http://localhost:8000/api/projects/12/users?page=1"
+                ],
+                "path": "http://localhost:8000/api/projects/12/users",
+                "per_page": 5,
+                "total": 2
+            }
+        }
+    },
+    "/projectUsers/{UserId}" : {
+        "get" : {
+            "role": "MEMBER",
+            "user": {
+                "id": "123",
+                "name": "Tyshawn Erdman",
+                "email": "moshe.stark@yahoo.com"
+            }
+        },
+        "put" : {
+            "role": "MEMBER",
+            "user": {
+                "id": "123",
+                "name": "Tyshawn Erdman",
+                "email": "moshe.stark@yahoo.com"
+            }
+        },
+        "delete" : {
+            "role": "MEMBER",
+            "user": {
+                "id": "123",
+                "name": "Tyshawn Erdman",
+                "email": "moshe.stark@yahoo.com"
+            }
+        }
+    }
+}

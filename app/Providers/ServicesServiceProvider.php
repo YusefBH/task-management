@@ -42,6 +42,8 @@ use App\Services\Subtask\DeleteSubtask\DeleteSubtaskServiceConcrete;
 use App\Services\Subtask\DeleteSubtask\DeleteSubtaskServiceInterface;
 use App\Services\Subtask\IndexSubtask\IndexSubtaskServiceConcrete;
 use App\Services\Subtask\IndexSubtask\IndexSubtaskServiceInterface;
+use App\Services\Subtask\RemoveLabelSubtask\RemoveLabelSubtaskServiceConcrete;
+use App\Services\Subtask\RemoveLabelSubtask\RemoveLabelSubtaskServiceInterface;
 use App\Services\Subtask\ShowSubtask\ShowSubtaskServiceConcrete;
 use App\Services\Subtask\ShowSubtask\ShowSubtaskServiceInterface;
 use App\Services\Subtask\UpdateSubtask\UpdateSubtaskServiceConcrete;
@@ -200,6 +202,11 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(
             UpdateSubtaskServiceInterface::class,
             UpdateSubtaskServiceConcrete::class
+        );
+
+        $this->app->bind(
+            RemoveLabelSubtaskServiceInterface::class,
+            RemoveLabelSubtaskServiceConcrete::class
         );
     }
 }
